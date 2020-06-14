@@ -1,3 +1,2 @@
-include ':util-lib'
 include ':app'
-rootProject.name = "moioio-lib"
+include ':util-lib'
