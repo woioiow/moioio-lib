@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/test"
-        android:label="@string/app_name"
+        android:label="@string/test_name"
         android:roundIcon="@drawable/test"
         android:supportsRtl="true">
         <activity android:name=".MainActivity">
