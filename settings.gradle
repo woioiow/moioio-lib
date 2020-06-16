@@ -1,2 +1,3 @@
+include ':easy-ui'
 include ':app'
 include ':util-lib'
