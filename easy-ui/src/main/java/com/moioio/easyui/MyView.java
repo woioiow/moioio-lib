@@ -18,8 +18,6 @@ public abstract class MyView extends RelativeLayout {
         initPage(context);
     }
 
-
-
     public abstract void initPage(Context context);
 
     public void show()
@@ -40,6 +38,21 @@ public abstract class MyView extends RelativeLayout {
     public Activity getActivity()
     {
         return (Activity)getContext();
+    }
+
+
+    public MyLayout makeLayout(int width,int height)
+    {
+        baseLayout = new MyLayout(width,height);
+        this.setLayoutParams(baseLayout.get());
+        return baseLayout;
+    }
+
+    public MyLayout makeLayout()
+    {
+        baseLayout = new MyLayout(UIConf.WRAP_CONTENT, UIConf.WRAP_CONTENT);
+        this.setLayoutParams(baseLayout.get());
+        return baseLayout;
     }
 
 
