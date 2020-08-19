@@ -1,6 +1,8 @@
 package com.moioio.android.util;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
@@ -53,5 +55,23 @@ public class BitmapUtil {
 
         return newBitmap;
     }
+
+
+    public static Bitmap getAssetsBitmap(Context context, String string) {
+        byte[] data = AppFileUtil.getAssetsData(context, string);
+        Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+        data = null;
+        return bmp;
+    }
+
+    public static Bitmap getFileBitmap(String path) {
+
+        Bitmap bmp = BitmapFactory.decodeFile(path);
+        return bmp;
+    }
+
+
+
+
 
 }

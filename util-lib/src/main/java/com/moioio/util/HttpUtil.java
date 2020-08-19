@@ -14,7 +14,7 @@ public class HttpUtil {
 
     public static byte[] getHttpData(String destUrl,boolean isbreak) {
 
-//        Util.debug("getHttpData---------:"+destUrl);
+//        MyLog.debug("getHttpData---------:"+destUrl);
         BufferedInputStream bis = null;
         HttpURLConnection httpUrl = null;
         URL url = null;
@@ -125,7 +125,7 @@ public class HttpUtil {
         return isOK;
     }
 
-    public static byte[] getHttpData(String destUrl,HttpListener listener,boolean isbreak)
+    public static byte[] getHttpData(String destUrl, HttpListener listener, boolean isbreak)
     {
         BufferedInputStream bis = null;
         HttpURLConnection httpUrl = null;
@@ -179,7 +179,7 @@ public class HttpUtil {
     }
 
 
-    public static String saveHttpCache(String url,String cachePath,boolean isUseCach,HttpListener listener) {
+    public static String saveHttpCache(String url, String cachePath, boolean isUseCach, HttpListener listener) {
 
         BufferedInputStream bis = null;
         HttpURLConnection httpUrl = null;
@@ -199,12 +199,18 @@ public class HttpUtil {
                     isHaveCache = true;
                 }
             }
+            else
+            {
+                file.delete();
+            }
 
             if(!isHaveCache)
             {
+                FileUtil.delFile(cachePath+name+"_tmp");
+
                 HttpURLConnection.setFollowRedirects(true);
                 httpUrl = (HttpURLConnection) new URL(url).openConnection();
-                httpUrl.setRequestProperty("Accept-Encoding", "identity");
+//                httpUrl.setRequestProperty("Accept-Encoding", "identity");
                 httpUrl.connect();
                 bis = new BufferedInputStream(httpUrl.getInputStream());
                 long total = httpUrl.getContentLength();
@@ -214,6 +220,11 @@ public class HttpUtil {
                 while ((size = bis.read(buf)) != -1) {
                     fos.write(buf, 0, size);
                     length += size;
+
+                    MyLog.debug("saveHttpCache---:total:"+total);
+                    MyLog.debug("saveHttpCache---:length:"+length);
+
+
                     if(listener!=null)
                     {
                         listener.loading(total,length);
@@ -234,6 +245,7 @@ public class HttpUtil {
             }
 
         } catch (Exception e) {
+            FileUtil.delFile(cachePath+name+"_tmp");
             e.printStackTrace();
         }
         finally
@@ -249,14 +261,6 @@ public class HttpUtil {
 
         return path;
     }
-
-
-
-    static interface HttpListener {
-        public void loading(long total, long current);
-        public boolean isStop();
-    }
-
 
 
 }

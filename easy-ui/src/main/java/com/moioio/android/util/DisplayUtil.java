@@ -51,6 +51,17 @@ public class DisplayUtil
     }
 
 
+    public static int getRateScreenHeight(Context context,float rate)
+    {
+        int height = (int) (DisplayUtil.getScreenHeight(context)*rate);
+        return height;
+    }
+
+    public static int getRateScreenWidth(Context context,float rate)
+    {
+        int width = (int) (DisplayUtil.getScreenWidth(context)*rate);
+        return width;
+    }
 
 
 }
