@@ -25,6 +25,7 @@ public class MyDivView extends MyView {
         super(context);
     }
 
+
     @Override
     public void initPage(Context context) {
 

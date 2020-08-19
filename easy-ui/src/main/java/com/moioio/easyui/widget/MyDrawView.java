@@ -3,6 +3,7 @@ package com.moioio.easyui.widget;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.RectF;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -26,6 +27,20 @@ public abstract class MyDrawView extends View
         ViewUtil.setViewID(this);
         g = new Graphics();
     }
+
+    public MyDrawView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        ViewUtil.setViewID(this);
+        g = new Graphics();
+    }
+
+    public MyDrawView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        ViewUtil.setViewID(this);
+        g = new Graphics();
+    }
+
+
 
     protected void onDraw(Canvas canvas)
     {

@@ -2,6 +2,7 @@ package com.moioio.easyui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 import com.moioio.android.util.ViewUtil;
 
@@ -16,6 +17,28 @@ public abstract class MyView extends RelativeLayout {
         super(context);
         ViewUtil.setViewID(this);
         initPage(context);
+    }
+
+    public MyView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        ViewUtil.setViewID(this);
+        initAttributeSet(attrs);
+        initPage(context);
+    }
+
+    public MyView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        ViewUtil.setViewID(this);
+        initAttributeSet(attrs,defStyleAttr);
+        initPage(context);
+    }
+
+    public void initAttributeSet(AttributeSet attrs) {
+
+    }
+
+    public void initAttributeSet(AttributeSet attrs, int defStyleAttr) {
+
     }
 
     public abstract void initPage(Context context);
