@@ -3,7 +3,7 @@ package com.moioio.android.easyui.widget;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.moioio.android.easyui.dailog.PopUp;
+import com.moioio.android.easyui.dialog.PopUp;
 import com.moioio.android.easyui.widget.alert.MyAlertView;
 import com.moioio.android.util.DisplayUtil;
 import com.moioio.util.DataUtil;

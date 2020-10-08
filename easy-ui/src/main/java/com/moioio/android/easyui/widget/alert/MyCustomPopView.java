@@ -9,8 +9,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.moioio.android.easyui.UIConf;
-import com.moioio.android.easyui.dailog.PopUp;
-import com.moioio.android.easyui.dailog.PopUpView;
+import com.moioio.android.easyui.dialog.PopUp;
+import com.moioio.android.easyui.dialog.PopUpView;
 import com.moioio.android.easyui.widget.MyLayout;
 import com.moioio.android.util.DisplayUtil;
 import com.moioio.android.util.ViewUtil;

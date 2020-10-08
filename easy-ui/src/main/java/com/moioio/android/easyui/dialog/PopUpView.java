@@ -1,4 +1,4 @@
-package com.moioio.android.easyui.dailog;
+package com.moioio.android.easyui.dialog;
 
 import android.content.Context;
 import android.graphics.Color;
