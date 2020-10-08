@@ -8,76 +8,77 @@ import java.util.Vector;
 public class StringUtil
 {
     static String STRING_NULL = "";
-    static String STRING = "";
-    static String T1 = "&#x";
 
-    static String T2 = "\\n";
+    public static String STRING = "";
 
-    static String T3 = "&copy;";
+    public static String T1 = "&#x";
 
-    static String T3_ = "(c)";
+    public static String T2 = "\\n";
 
-    static String T4 = "&amp;";
+    public static String T3 = "&copy;";
 
-    static String T4_ = "&";
+    public static String T3_ = "(c)";
 
-    static String T5 = "&lt;";
+    public static String T4 = "&amp;";
 
-    static String T5_ = "<";
+    public static String T4_ = "&";
 
-    static String T6 = "&gt;";
+    public static String T5 = "&lt;";
 
-    static String T6_ = ">";
+    public static String T5_ = "<";
 
-    static String T7 = "&nbsp;";
+    public static String T6 = "&gt;";
 
-    static String T7_ = " ";
+    public static String T6_ = ">";
 
-    static String T8 = "&apos;";
+    public static String T7 = "&nbsp;";
 
-    static String T8_ = "'";
+    public static String T7_ = " ";
 
-    static String T9 = "&quot;";
+    public static String T8 = "&apos;";
 
-    static String T9_ = "\"";
+    public static String T8_ = "'";
 
-    static String T10 = "&#039;";
+    public static String T9 = "&quot;";
 
-    static String T10_ = "'";
+    public static String T9_ = "\"";
 
-    static String T11 = "&#32;";
+    public static String T10 = "&#039;";
 
-    static String T11_ = " ";
+    public static String T10_ = "'";
 
-    static String T12 = "&#8226;";
+    public static String T11 = "&#32;";
 
-    static String T12_ = "\u25aa";
+    public static String T11_ = " ";
 
+    public static String T12 = "&#8226;";
 
-    static String T13= "&#169;";
-
-    static String T13_ = "(c)";
-
-    static String T14 = "..";
-
-//    static String T15 = ".news";
-
-    static String DOCMENT = "";
-
-    static String DTD_ELEMENT = "ELEMENT";
-
-    static String DTD_CDATA = "CDATA";
-
-    static String DTD_EMPTY = "EMPTY";
+    public static String T12_ = "\u25aa";
 
 
-    static String COMMET_END = "-->";
+    public static String T13= "&#169;";
 
-    static String TAG_END = "</";
-    static String TAG_HEX = "0x";
+    public static String T13_ = "(c)";
 
-    static String UTF_8 = "utf-8";
+    public static String T14 = "..";
 
+//    public static String T15 = ".news";
+
+    public static String DOCMENT = "";
+
+    public static String DTD_ELEMENT = "ELEMENT";
+
+    public static String DTD_CDATA = "CDATA";
+
+    public static String DTD_EMPTY = "EMPTY";
+
+
+    public static String COMMET_END = "-->";
+
+    public static String TAG_END = "</";
+    public static String TAG_HEX = "0x";
+
+    public static String UTF_8 = "utf-8";
 
 
     public static boolean isNull(String css) {

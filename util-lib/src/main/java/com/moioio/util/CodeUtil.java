@@ -2,6 +2,7 @@ package com.moioio.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
@@ -24,26 +25,48 @@ public class CodeUtil {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            MyLog.printStackTrace(e);
         }
         return bigInt.toString(16);
     }
 
-    public static String getStringMD5(String str){
-        BigInteger bigInt = null;
+    public static String getByteMD5(byte[] data){
+
+
+        String md5 = "";
+        if(data==null)
+        {
+            return md5;
+        }
         try
         {
+            BigInteger bigInt = null;
             MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] buffer = str.getBytes("utf-8");
+            byte[] buffer = data;
             int length = buffer.length;
             md.update(buffer, 0, length);
             bigInt = new BigInteger(1, md.digest());
+            md5 = bigInt.toString(16);
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            MyLog.printStackTrace(e);
         }
-        return bigInt.toString(16);
+        return md5;
+    }
+
+
+
+    public static String getStringMD5(String str){
+
+        byte[] buffer = new byte[0];
+        try {
+            buffer = str.getBytes("utf-8");
+        } catch (UnsupportedEncodingException e) {
+            MyLog.printStackTrace(e);
+        }
+
+        return getByteMD5(buffer);
     }
 
 
@@ -63,7 +86,7 @@ public class CodeUtil {
             }
             md5Str =  result.toString();
         } catch ( Exception e) {
-            e.printStackTrace();
+            MyLog.printStackTrace(e);
         }
         return md5Str;
     }
