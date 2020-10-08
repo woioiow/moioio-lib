@@ -1,3 +1,4 @@
 include ':easy-ui'
 include ':app'
 include ':util-lib'
+include ':physical_lib'

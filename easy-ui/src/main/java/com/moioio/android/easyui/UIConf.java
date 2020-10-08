@@ -1,4 +1,4 @@
-package com.moioio.easyui;
+package com.moioio.android.easyui;
 
 import android.view.ViewGroup;
 

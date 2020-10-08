@@ -1,12 +1,12 @@
-package com.moioio.easyui.widget.alert;
+package com.moioio.android.easyui.widget.alert;
 
 import android.content.Context;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.moioio.android.easyui.UIConf;
+import com.moioio.android.easyui.widget.MyLayout;
 import com.moioio.android.util.ViewUtil;
-import com.moioio.easyui.MyLayout;
-import com.moioio.easyui.UIConf;
 
 public class MyAlertView extends MyCustomPopView {
 

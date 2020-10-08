@@ -1,5 +1,4 @@
-package com.moioio.easyui.widget;
-
+package com.moioio.android.easyui.widget;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +9,7 @@ import android.widget.BaseAdapter;
 import com.moioio.util.MyLog;
 
 import java.lang.reflect.Constructor;
+import java.util.List;
 import java.util.Vector;
 
 public class MyBaseAdapter extends BaseAdapter {
@@ -17,7 +17,6 @@ public class MyBaseAdapter extends BaseAdapter {
     private Vector dataList;
     private Context context;
     private Class viewCLZ;
-    private Object bind;
     private ViewHolder viewHolder;
     private MyBaseAdapterListener listener;
 
@@ -55,14 +54,12 @@ public class MyBaseAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-
-        MyLog.debug("position----"+position);
-
+        MyLog.debug("position-----"+position);
         if (convertView == null)
         {
             try
             {
+                MyLog.debug("viewCLZ------"+viewCLZ);
                 viewHolder = new ViewHolder();
                 Constructor con = viewCLZ.getConstructor(Context.class);
                 convertView = (MyBaseAdapterItemView)con.newInstance(context);
@@ -71,16 +68,17 @@ public class MyBaseAdapter extends BaseAdapter {
             }
             catch (Exception e)
             {
-                e.printStackTrace();
+                MyLog.printStackTrace(e);
             }
         }
         else
         {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.view.setPosition(position);
-        viewHolder.view.setBind(bind);
-        viewHolder.view.setData(dataList.elementAt(position));
+        if(viewHolder.view!=null)
+        {
+            viewHolder.view.setData(dataList.elementAt(position));
+        }
 
         if(listener!=null)
         {
@@ -113,20 +111,13 @@ public class MyBaseAdapter extends BaseAdapter {
         dataList.removeAllElements();
     }
 
-    public void setAll(Vector all) {
-
-        dataList = all;
-
-//        dataList.removeAllElements();
-//        for(Object obj:all)
-//        {
-//            dataList.addElement(obj);
-//        }
+    public void setAll(List all) {
+        for(Object obj:all)
+        {
+            dataList.addElement(obj);
+        }
     }
 
-    public void setBind(Object bind) {
-        this.bind = bind;
-    }
 
 
     class ViewHolder {

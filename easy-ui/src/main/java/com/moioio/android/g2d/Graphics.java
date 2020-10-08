@@ -45,12 +45,12 @@ public class Graphics
 
 
 //	private Path path = new Path();
-	
-	private RectF clip  = new RectF();
 
-	private RectF rect = new RectF();
-	private RectF oval = new RectF();
-	private Matrix matrix = new Matrix();
+    private RectF clip  = new RectF();
+
+    private RectF rect = new RectF();
+    private RectF oval = new RectF();
+    private Matrix matrix = new Matrix();
     private DashPathEffect dashPathEffect = new DashPathEffect(new float[]{7, 7}, 0);
 
 
@@ -65,48 +65,49 @@ public class Graphics
         textPaint.setDither(true);
     }
 
-     public Graphics(Canvas canvas)
-     {
-         grap = canvas;
-         paint = new Paint();
-         paint.setAntiAlias(true);
-         paint.setDither(true);
+    public Graphics(Canvas canvas)
+    {
+        grap = canvas;
+        paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setDither(true);
 
-         textPaint = new TextPaint();
-         textPaint.setAntiAlias(true);
-         textPaint.setDither(true);
+        textPaint = new TextPaint();
+        textPaint.setAntiAlias(true);
+        textPaint.setDither(true);
 
-     }
-     //09-28 16:48:05.894: W/System.err(1356): java.lang.IllegalStateException: Immutable bitmap passed to Canvas constructor
+    }
+    //09-28 16:48:05.894: W/System.err(1356): java.lang.IllegalStateException: Immutable bitmap passed to Canvas constructor
 
 
-     
-     public void setCanvas(Canvas canvas) 
-     {
-         grap = canvas;
-     }
-     
+
+    public void setCanvas(Canvas canvas)
+    {
+        grap = canvas;
+    }
+
 
     public void drawScaleImage(Bitmap img, float x, float y, float sx, float sy) {
-		matrix.reset();
-		matrix.setScale(sx, sy);
-		matrix.postTranslate(x, y);
-		grap.drawBitmap(img,matrix, paint);
+        matrix.reset();
+        matrix.setScale(sx, sy);
+        matrix.postTranslate(x+offX, y+offY);
+        grap.drawBitmap(img,matrix, paint);
     }
 
     public void drawImage(Bitmap img, float x, float y) {
-    	grap.drawBitmap(img, x, y, paint);
+        grap.drawBitmap(img, x+offX, y+offY, paint);
     }
-    
+
     public void setXfermode(int type)
     {
+//        paint.setXfermode()
 //        gra
 //        grap2d.setComposite(AlphaComposite.getInstance(AlphaComposite.Xor, 0.5f));
     }
-    
+
 
     public void setColor(int ARGB) {
-		paint.setColor(ARGB);
+        paint.setColor(ARGB);
         textPaint.setColor(ARGB);
     }
 
@@ -127,39 +128,40 @@ public class Graphics
 
 
     public void fillRect(float x, float y, float width, float height) {
-		paint.setStyle(Paint.Style.FILL);
-		grap.drawRect(x, y, x + width, y + height, paint);
+        paint.setStyle(Paint.Style.FILL);
+        grap.drawRect(x+offX, y+offY, x+offX + width, y+offY + height, paint);
 
     }
-    
+
     public void fillRoundRect(float x, float y, float width, float height,
                               float arcWidth, float arcHeight)
     {
-		paint.setStyle(Paint.Style.FILL);
-	   	rect.set(x, y, x + width, y + height);
-	   	grap.drawRoundRect(rect, arcWidth, arcHeight, paint);
-    }    
-   
-    public void fillArc(float x, float y, float width, float height, int startAngle,
-                    int arcAngle)
+        paint.setStyle(Paint.Style.FILL);
+        rect.set(x+offX, y+offY, x+offX + width, y+offY + height);
+        grap.drawRoundRect(rect, arcWidth, arcHeight, paint);
+    }
+
+    public void fillArc(float x, float y, float width, float height, float startAngle,
+                        float arcAngle)
     {
-	   	paint.setStyle(Paint.Style.FILL);
-	    rect.set(x, y, x + width, y + height);
-	    grap.drawArc(rect, -(startAngle+arcAngle), arcAngle, true, paint);
+        paint.setStyle(Paint.Style.FILL);
+        rect.set(x+offX, y+offY, x+offX + width, y+offY + height);
+//        grap.drawArc(rect, -(startAngle+arcAngle), arcAngle, true, paint);
+        grap.drawArc(rect, startAngle, arcAngle, true, paint);
     }
 
     public void drawArc(int x, int y, int width, int height, int startAngle,
                         int arcAngle)
     {
         paint.setStyle(Paint.Style.STROKE);
-        rect.set(x, y, x + width, y + height);
+        rect.set(x+offX, y+offY, x+offX + width, y+offY + height);
         grap.drawArc(rect, -(startAngle+arcAngle), arcAngle, true, paint);
     }
 
     public void drawLine(float x1, float y1, float x2, float y2)
     {
-		paint.setStyle(Paint.Style.STROKE);
-		grap.drawLine(x1, y1, x2, y2, paint);
+        paint.setStyle(Paint.Style.STROKE);
+        grap.drawLine(x1+offX, y1+offY, x2+offX, y2+offY, paint);
     }
 
     public void fillLine(float x, float y, float w, float h)
@@ -172,15 +174,15 @@ public class Graphics
 
     public void drawRotateImage(Bitmap img, int x, int y, int r, float angle) {
 
-		matrix.reset();
-		matrix.setRotate(angle);
-		matrix.postTranslate(x, y);
-		grap.drawBitmap(img,matrix, paint);
+        matrix.reset();
+        matrix.setRotate(angle);
+        matrix.postTranslate(x+offX, y+offY);
+        grap.drawBitmap(img,matrix, paint);
     }
 
     public void setClip(int x, int y, int width, int height)
     {
-		clip.set(x, y, x + width, y + height);
+        clip.set(x+offX, y+offY, x+offX + width, y+offY + height);
 //        grap.clipRect(clip, Region.Op.REPLACE);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
             grap.clipRect(clip );//p,
@@ -202,7 +204,7 @@ public class Graphics
 
     public void setOutClip(int x, int y, int width, int height, Region.Op op)
     {
-        clip.set(x, y, x + width, y + height);
+        clip.set(x+offX, y+offY, x+offX + width, y+offY + height);
         if(Build.VERSION.SDK_INT >= 26){
             grap.clipOutRect(clip );//p, android.graphics.Region.Op.REPLACE
         }else {
@@ -213,19 +215,19 @@ public class Graphics
 
     public void setColor(int A, int R, int G, int B)
     {
-    	paint.setARGB(A, R, G, B);
+        paint.setARGB(A, R, G, B);
     }
 
-	public void drawRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
-		paint.setStyle(Paint.Style.STROKE);
-	   	rect.set(x, y, x + width, y + height);
-	   	grap.drawRoundRect(rect, arcWidth, arcHeight, paint);
-	}
+    public void drawRoundRect(float x, float y, float width, float height, float arcWidth, float arcHeight) {
+        paint.setStyle(Paint.Style.STROKE);
+        rect.set(x+offX, y+offY, x+offX + width, y+offY + height);
+        grap.drawRoundRect(rect, arcWidth, arcHeight, paint);
+    }
 
-	public void drawRect(float x, float y, float width, float height) {
-		paint.setStyle(Paint.Style.STROKE);
-		grap.drawRect(x, y, x + width, y + height, paint);
-	}
+    public void drawRect(float x, float y, float width, float height) {
+        paint.setStyle(Paint.Style.STROKE);
+        grap.drawRect(x+offX, y+offY, x+offX + width, y+offY + height, paint);
+    }
 
     public void drawRect(RectF rectF,Matrix matrix) {
         paint.setStyle(Paint.Style.STROKE);
@@ -236,29 +238,35 @@ public class Graphics
         paint.setStyle(Paint.Style.STROKE);
         PathEffect pathEffect =paint.getPathEffect();
         paint.setPathEffect(dashPathEffect);
-        grap.drawRect(x, y, x + width, y + height, paint);
+        grap.drawRect(x+offX, y+offY, x+offX + width, y+offY + height, paint);
         paint.setPathEffect(pathEffect);
     }
 
     public void fillOval(float x, float y, float width, float height)
     {
-		paint.setStyle(Paint.Style.FILL);
-    	oval.set(x, y, x + width, y + height);
-    	grap.drawOval(oval, paint);
+        paint.setStyle(Paint.Style.FILL);
+        oval.set(x+offX, y+offY, x+offX + width, y+offY + height);
+        grap.drawOval(oval, paint);
     }
 
     public void fillCircle(float x, float y, float radius)
     {
         paint.setStyle(Paint.Style.FILL);
-        grap.drawCircle(x,y,radius, paint);
+        grap.drawCircle(x+offX, y+offY,radius, paint);
+    }
+
+    public void drawCircle(float x, float y, float radius)
+    {
+        paint.setStyle(Paint.Style.STROKE);
+        grap.drawCircle(x+offX, y+offY,radius, paint);
     }
 
     public void drawOval(int x, int y, int width, int height)
     {
-		paint.setStyle(Paint.Style.STROKE);
-    	oval.set(x, y, x + width, y + height);
-    	grap.drawOval(oval, paint);
-        
+        paint.setStyle(Paint.Style.STROKE);
+        oval.set(x+offX, y+offY, x+offX + width, y+offY + height);
+        grap.drawOval(oval, paint);
+
     }
 
 
@@ -282,8 +290,8 @@ public class Graphics
     public void drawString(String str,float x,float y) {
         textPaint.setStyle(Paint.Style.FILL);
         textPaint.getTextBounds(str, 0, str.length(), fontTmpRect);
-        float dx = x  - fontTmpRect.left;
-        float dy = y + fontTmpRect.height() - fontTmpRect.bottom;
+        float dx = x+offX  - fontTmpRect.left;
+        float dy = y+offY + fontTmpRect.height() - fontTmpRect.bottom;
         grap.drawText(str,dx,dy,textPaint);
     }
 
@@ -292,8 +300,8 @@ public class Graphics
         textPaint.setStyle(Paint.Style.STROKE);
         textPaint.setStrokeWidth(width);
         textPaint.getTextBounds(str, 0, str.length(), fontTmpRect);
-        float dx = x  - fontTmpRect.left;
-        float dy = y + fontTmpRect.height() - fontTmpRect.bottom;
+        float dx = x+offX  - fontTmpRect.left;
+        float dy = y+offY + fontTmpRect.height() - fontTmpRect.bottom;
         grap.drawText(str,dx,dy,textPaint);
         textPaint.setStrokeWidth(0);
     }
@@ -322,8 +330,10 @@ public class Graphics
 
     public void fillPath(Path path) {
 
+        grap.translate(offX,offY);
         paint.setStyle(Paint.Style.FILL);
         grap.drawPath(path, paint);
+        grap.translate(-offX,-offY);
     }
 
 
@@ -413,6 +423,19 @@ public class Graphics
 
     public void setHeight(float height) {
         this.height = height;
+    }
+
+
+    private float offX;
+    private float offY;
+
+    public void translate(float x, float y) {
+        offX += x;
+        offY += y;
+    }
+
+    public Canvas getCanvas() {
+        return grap;
     }
 
 //    public ColorMatrix getColorMatrix() {

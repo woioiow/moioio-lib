@@ -1,4 +1,4 @@
-package com.moioio.easyui.widget.alert;
+package com.moioio.android.easyui.widget.alert;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,12 +8,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.moioio.android.easyui.UIConf;
+import com.moioio.android.easyui.dailog.PopUp;
+import com.moioio.android.easyui.dailog.PopUpView;
+import com.moioio.android.easyui.widget.MyLayout;
 import com.moioio.android.util.DisplayUtil;
 import com.moioio.android.util.ViewUtil;
-import com.moioio.easyui.MyLayout;
-import com.moioio.easyui.UIConf;
-import com.moioio.easyui.dailog.PopUp;
-import com.moioio.easyui.dailog.PopUpView;
 
 
 public class MyCustomPopView extends PopUpView {
@@ -69,7 +69,7 @@ public class MyCustomPopView extends PopUpView {
 
 
 
-        RelativeLayout.LayoutParams messageView_params = new MyLayout(UIConf.MATCH_PARENT,UIConf.WRAP_CONTENT)
+        RelativeLayout.LayoutParams messageView_params = new MyLayout(UIConf.MATCH_PARENT, UIConf.WRAP_CONTENT)
                 .addRule(RelativeLayout.BELOW,titleView.getId())
                 .addRule(RelativeLayout.ABOVE,btnsLayout.getId())
                 .setMargins(margin,margin,margin,margin).get();
@@ -109,15 +109,15 @@ public class MyCustomPopView extends PopUpView {
         {
             Button button = new Button(getContext());
             button.setTextColor(UIConf.ALERT_BUTTON_TEXT_COLOR);
-            button.setBackgroundDrawable(ViewUtil.makeRoundDrawableBord(30,DisplayUtil.getDip(getContext(),1), UIConf.ALERT_BUTTON_BORDER_COLOR, UIConf.ALERT_BUTTON_COLOR));
-//            ViewUtil.setViewShadow(button,20,AUtil.getDip(getContext(),5),Color.BLACK);
+            button.setBackgroundDrawable(ViewUtil.makeRoundDrawableBord(30, DisplayUtil.getDip(getContext(),1), UIConf.ALERT_BUTTON_BORDER_COLOR, UIConf.ALERT_BUTTON_COLOR));
+//            ViewUtil.setViewShadow(button,20,DisplayUtil.getDip(getContext(),5),Color.BLACK);
 
 
             button.setTag(onClickListener);
             button.setText(name);
 
 
-            button.setOnClickListener(new OnClickListener() {
+            button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     PopUp.OnClickListener listener = (PopUp.OnClickListener)v.getTag();

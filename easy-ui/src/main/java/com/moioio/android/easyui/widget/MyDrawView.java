@@ -1,4 +1,4 @@
-package com.moioio.easyui.widget;
+package com.moioio.android.easyui.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -113,8 +113,10 @@ public abstract class MyDrawView extends View
     float y_down = 0;
     float x_up = 0;
     float y_up = 0;
-    public float dragRate_x;
-    public float dragRate_y;
+    public float dragRateX;
+    public float dragRateY;
+    public float dragValueX;
+    public float dragValueY;
 
 
     public void onSeekTouch(int action, float px, float py)
@@ -143,10 +145,10 @@ public abstract class MyDrawView extends View
             case ACTION_MOVE:
                 if (dragMode == DRAG)
                 {
-                    float cx = (px - x_down);
-                    float cy = (py - y_down);
-                    dragRate_x = cx / mw;
-                    dragRate_y = cy / mh;
+                    dragValueX  = (px - x_down);
+                    dragValueY = (py - y_down);
+                    dragRateX = dragValueX / mw;
+                    dragRateY = dragValueY / mh;
                 }
                 break;
             case ACTION_UP:

@@ -1,4 +1,4 @@
-package com.moioio.easyui;
+package com.moioio.android.easyui.widget;
 
 import android.widget.RelativeLayout;
 
@@ -13,7 +13,18 @@ public class MyLayout {
     public MyLayout(int width, int height)
     {
         layoutParams = new RelativeLayout.LayoutParams(width,height);
+    }
 
+    public MyLayout setWidth(int width)
+    {
+        layoutParams.width = width;
+        return this;
+    }
+
+    public MyLayout setHeight(int height)
+    {
+        layoutParams.height = height;
+        return this;
     }
 
     public MyLayout addRule(int rule)
@@ -33,6 +44,13 @@ public class MyLayout {
         layoutParams.setMargins(left,top,right,bottom);
         return this;
     }
+
+    public MyLayout setMargin(int margin)
+    {
+        layoutParams.setMargins(margin,margin,margin,margin);
+        return this;
+    }
+
 
     public RelativeLayout.LayoutParams get() {
         return layoutParams;

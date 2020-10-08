@@ -1,4 +1,4 @@
-package com.moioio.easyui.widget;
+package com.moioio.android.easyui.widget;
 
 public interface MyBaseAdapterListener {
 

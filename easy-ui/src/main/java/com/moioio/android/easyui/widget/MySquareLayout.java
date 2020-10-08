@@ -1,8 +1,6 @@
-package com.moioio.easyui.widget;
+package com.moioio.android.easyui.widget;
 
 import android.content.Context;
-
-import com.moioio.easyui.MyView;
 
 public class MySquareLayout extends MyView {
 

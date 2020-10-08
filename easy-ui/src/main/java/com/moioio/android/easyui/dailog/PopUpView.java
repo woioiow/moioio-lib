@@ -1,22 +1,22 @@
-package com.moioio.easyui.dailog;
+package com.moioio.android.easyui.dailog;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.moioio.android.easyui.UIConf;
+import com.moioio.android.easyui.widget.MyLayout;
+import com.moioio.android.easyui.widget.MyView;
 import com.moioio.android.util.DisplayUtil;
 import com.moioio.android.util.ViewUtil;
-import com.moioio.easyui.MyLayout;
-import com.moioio.easyui.MyView;
-import com.moioio.easyui.UIConf;
 
 
 public abstract class PopUpView extends MyView {
 
     private int viewWidth = 0;
     private int viewHeight = 0;
-    private RelativeLayout.LayoutParams layout_params;
+    private LayoutParams layout_params;
     private RelativeLayout layout;
     private PopUp popUp;
 
@@ -36,7 +36,7 @@ public abstract class PopUpView extends MyView {
 
 
 
-        ViewUtil.setViewShadow(layout,20,DisplayUtil.getDip(context,10), Color.BLACK);
+        ViewUtil.setViewShadow(layout,20, DisplayUtil.getDip(context,10), Color.BLACK);
 
         layout_params = new MyLayout(viewWidth,viewHeight)
             .addRule(RelativeLayout.CENTER_IN_PARENT).get();

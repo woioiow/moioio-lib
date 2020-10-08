@@ -1,4 +1,4 @@
-package com.moioio.easyui.widget;
+package com.moioio.android.easyui.widget;
 
 
 import android.content.Context;
@@ -13,9 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.moioio.easyui.MyLayout;
-import com.moioio.easyui.MyView;
-import com.moioio.easyui.UIConf;
+import com.moioio.android.easyui.UIConf;
 
 public class MyDivView extends MyView {
 

@@ -1,4 +1,4 @@
-package com.moioio.easyui.widget.gif;
+package com.moioio.android.easyui.widget.gif;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;

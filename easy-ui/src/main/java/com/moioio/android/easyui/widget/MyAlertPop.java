@@ -1,11 +1,11 @@
-package com.moioio.easyui.widget;
+package com.moioio.android.easyui.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import com.moioio.android.easyui.dailog.PopUp;
+import com.moioio.android.easyui.widget.alert.MyAlertView;
 import com.moioio.android.util.DisplayUtil;
-import com.moioio.easyui.dailog.PopUp;
-import com.moioio.easyui.widget.alert.MyAlertView;
 import com.moioio.util.DataUtil;
 
 public class MyAlertPop extends PopUp {
@@ -43,7 +43,7 @@ public class MyAlertPop extends PopUp {
         return this;
     }
 
-    public MyAlertPop addButton(String name, PopUp.OnClickListener onClickListener)
+    public MyAlertPop addButton(String name, OnClickListener onClickListener)
     {
         myAlertView.addButton(name,onClickListener);
         return this;

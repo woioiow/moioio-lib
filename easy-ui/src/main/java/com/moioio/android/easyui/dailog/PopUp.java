@@ -1,4 +1,4 @@
-package com.moioio.easyui.dailog;
+package com.moioio.android.easyui.dailog;
 
 import android.app.Dialog;
 import android.content.Context;

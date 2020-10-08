@@ -1,4 +1,4 @@
-package com.moioio.easyui.widget;
+package com.moioio.android.easyui.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,10 +9,8 @@ import android.widget.RelativeLayout;
 import com.moioio.android.util.AppFileUtil;
 import com.moioio.android.util.TimerHandler;
 import com.moioio.android.util.ViewUtil;
-import com.moioio.easyui.MyLayout;
-import com.moioio.easyui.MyView;
-import com.moioio.easyui.UIConf;
-import com.moioio.easyui.widget.gif.GifDecoder;
+import com.moioio.android.easyui.UIConf;
+import com.moioio.android.easyui.widget.gif.GifDecoder;
 import com.moioio.util.CodeUtil;
 
 
