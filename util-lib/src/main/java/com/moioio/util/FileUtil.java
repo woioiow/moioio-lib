@@ -9,7 +9,12 @@ public class FileUtil
 {
 
 
-
+    public static String getCachFilePath(String cachePath,String url)
+    {
+        String name = CodeUtil.md5(url);
+        String path = cachePath+name;
+        return path;
+    }
 
     public static void copyFile(String oldPath, String newPath) {
         try {
@@ -33,7 +38,7 @@ public class FileUtil
             output.close();
             input.close();
         } catch (Exception e) {
-//            e.printStackTrace();
+//            MyLog.printStackTrace(e);
         }
     }
 
@@ -52,7 +57,7 @@ public class FileUtil
             file.close();
             return bs;
         } catch (Exception e) {
-//            e.printStackTrace();
+//            MyLog.printStackTrace(e);
         }
         return null;
     }
@@ -159,7 +164,7 @@ public class FileUtil
                 }
             }
         } catch (Exception e) {
-            //   e.printStackTrace();
+            //   MyLog.printStackTrace(e);
         }
     }
 
@@ -225,7 +230,7 @@ public class FileUtil
                 }
             }
         }
-   }
+    }
 
 
 
