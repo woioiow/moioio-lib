@@ -8,6 +8,10 @@ import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Shader;
 
 public class BitmapUtil {
@@ -35,7 +39,7 @@ public class BitmapUtil {
     }
 
 
-    public static Bitmap getCirleBitmap(Bitmap bmp) {
+    public static Bitmap getCircleBitmap(Bitmap bmp) {
         int w = bmp.getWidth();
         int h = bmp.getHeight();
         int r = Math.min(w, h);
@@ -52,6 +56,34 @@ public class BitmapUtil {
         paint.setShader(bitmapShader);
 
         canvas.drawCircle(r / 2, r / 2, r / 2, paint);
+
+        return newBitmap;
+    }
+
+    public static Bitmap getRoundedCornerBitmap(Bitmap bitmap,float roundPx){
+
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
+        int r = Math.min(w, h);
+
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+
+        Bitmap newBitmap = Bitmap.createBitmap(r, r, Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(newBitmap);
+
+        BitmapShader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+
+        paint.setShader(bitmapShader);
+
+        final Rect rect = new Rect(0, 0, w, h);
+        final RectF rectF = new RectF(rect);
+
+        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+
+
+//        canvas.drawCircle(r / 2, r / 2, r / 2, paint);
 
         return newBitmap;
     }

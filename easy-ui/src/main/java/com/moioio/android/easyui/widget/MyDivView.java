@@ -52,6 +52,11 @@ public class MyDivView extends MyView {
         return this;
     }
 
+    public MyDivView setDivGravity(int gravity)
+    {
+        layout.setGravity(gravity);
+        return this;
+    }
 
 
     public MyDivView addText(String name)

@@ -2,6 +2,8 @@ package com.moioio.android.easyui.widget;
 
 import android.widget.RelativeLayout;
 
+import com.moioio.android.easyui.UIConf;
+
 public class MyLayout {
 
 
@@ -9,6 +11,12 @@ public class MyLayout {
 
 
     private RelativeLayout.LayoutParams layoutParams;
+
+    public MyLayout()
+    {
+        layoutParams = new RelativeLayout.LayoutParams(UIConf.WRAP_CONTENT,UIConf.WRAP_CONTENT);
+    }
+
 
     public MyLayout(int width, int height)
     {
