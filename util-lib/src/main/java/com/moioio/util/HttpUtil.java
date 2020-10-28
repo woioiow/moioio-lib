@@ -221,8 +221,8 @@ public class HttpUtil {
                     fos.write(buf, 0, size);
                     length += size;
 
-                    MyLog.debug("saveHttpCache---:total:"+total);
-                    MyLog.debug("saveHttpCache---:length:"+length);
+//                    MyLog.debug("saveHttpCache---:total:"+total);
+//                    MyLog.debug("saveHttpCache---:length:"+length);
 
 
                     if(listener!=null)
