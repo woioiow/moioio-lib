@@ -12,13 +12,12 @@ import com.moioio.android.util.DisplayUtil;
 import com.moioio.android.util.ViewUtil;
 
 
-public abstract class PopUpView extends MyView {
+public abstract class PopUpView extends PopUpBaseView {
 
     private int viewWidth = 0;
     private int viewHeight = 0;
     private LayoutParams layout_params;
     private RelativeLayout layout;
-    private PopUp popUp;
 
     public PopUpView(Context context) {
         super(context);
@@ -98,23 +97,8 @@ public abstract class PopUpView extends MyView {
         this.viewHeight = viewHeight;
     }
 
-    public PopUp getPopUp() {
-        return popUp;
-    }
 
-    public void setPopUp(PopUp popUp) {
-        this.popUp = popUp;
-    }
 
-    public void onShow()
-    {
-
-    }
-
-    public void onCancel()
-    {
-
-    }
 
 
 }

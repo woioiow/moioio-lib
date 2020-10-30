@@ -54,12 +54,12 @@ public class MyBaseAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MyLog.debug("position-----"+position);
+//        MyLog.debug("position-----"+position);
         if (convertView == null)
         {
             try
             {
-                MyLog.debug("viewCLZ------"+viewCLZ);
+//                MyLog.debug("viewCLZ------"+viewCLZ);
                 viewHolder = new ViewHolder();
                 Constructor con = viewCLZ.getConstructor(Context.class);
                 convertView = (MyBaseAdapterItemView)con.newInstance(context);

@@ -30,12 +30,12 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        this.setContentView(new TestView(this));
 
-        MyLog.debug("Build.TAGS:::"+Build.TAGS);
+//        MyLog.debug("Build.TAGS:::"+Build.TAGS);
 
-
-        getDeviceSimAndroidUUID(this);
-        getUUID(this);
+//        getDeviceSimAndroidUUID(this);
+//        getUUID(this);
 
     }
 

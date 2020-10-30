@@ -206,15 +206,15 @@ public class AppFileUtil {
                     } catch (Exception e) {
                     }
                 }
-                MyLog.debug("path---:"+path);
+//                MyLog.debug("path---:"+path);
                 if(StringUtil.isNull(path))
                 {
                     String fileName = getFileName(context, uri);
-                    MyLog.debug("fileName---:"+fileName);
+//                    MyLog.debug("fileName---:"+fileName);
                     File cacheDir = getDocumentCacheDir(context);
-                    MyLog.debug("cacheDir---:"+cacheDir.getPath());
+//                    MyLog.debug("cacheDir---:"+cacheDir.getPath());
                     File file = generateFileName(fileName, cacheDir);
-                    MyLog.debug("file---:"+file.getPath());
+//                    MyLog.debug("file---:"+file.getPath());
                     String destinationPath = null;
                     if (file != null) {
                         destinationPath = file.getAbsolutePath();

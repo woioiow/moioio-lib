@@ -1,6 +1,8 @@
 package com.moioio.android.util;
 
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Outline;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -106,6 +108,53 @@ public class ViewUtil {
     }
 
 
+    public static StateListDrawable getClickDrawable(Drawable pressDrawable, Drawable drawable) {
+
+        int pressed = android.R.attr.state_pressed;
+        int window_focused = android.R.attr.state_window_focused;
+        int focused = android.R.attr.state_focused;
+        int selected = android.R.attr.state_selected;
+
+
+        StateListDrawable stateListDrawable = new StateListDrawable();
+        stateListDrawable.addState(new int []{pressed , window_focused}, pressDrawable);
+        stateListDrawable.addState(new int []{pressed , -focused}, pressDrawable);
+        stateListDrawable.addState(new int []{selected }, pressDrawable);
+        stateListDrawable.addState(new int []{focused }, pressDrawable);
+        stateListDrawable.addState(new int []{}, drawable);
+
+        return stateListDrawable;
+    }
+
+
+    public static ColorStateList getClickColor(int pressColor, int color) {
+
+        int pressed = android.R.attr.state_pressed;
+        int window_focused = android.R.attr.state_window_focused;
+        int focused = android.R.attr.state_focused;
+        int selected = android.R.attr.state_selected;
+
+
+        int[][] states = new int[][] {
+                new int []{pressed , window_focused}, // enabled
+                new int []{pressed , -focused}, // disabled
+                new int []{selected }, // unchecked
+                new int []{focused },  // pressed
+                new int []{}
+        };
+
+        int[] colors = new int[] {
+                pressColor,
+                pressColor,
+                pressColor,
+                pressColor,
+                color
+        };
+
+        ColorStateList colorStateList = new ColorStateList(states,colors);
+        return colorStateList;
+    }
+
 
 
     public static void hideView(View view) {
@@ -116,6 +165,18 @@ public class ViewUtil {
     }
 
 
+    public static int getAntiColor(int color)
+    {
+        int alpha = Color.alpha(color);
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
 
+        red = 255 - red;
+        green = 255 - green;
+        blue = 255 - blue;
+
+        return Color.argb(alpha,red,green,blue);
+    }
 
 }

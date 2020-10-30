@@ -19,6 +19,11 @@ public class PopUp extends Dialog
     public void setContentView(View view)
     {
         currentView = view;
+        if(currentView!=null&&currentView instanceof PopUpBaseView)
+        {
+            ((PopUpBaseView)currentView).setPopUp(this);
+        }
+
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         super.setContentView(view,layoutParams);
     }
@@ -26,18 +31,18 @@ public class PopUp extends Dialog
     public void show()
     {
         super.show();
-        if(currentView!=null&&currentView instanceof PopUpView)
+        if(currentView!=null&&currentView instanceof PopUpBaseView)
         {
-            ((PopUpView)currentView).onShow();
+            ((PopUpBaseView)currentView).onShow();
         }
     }
 
     public void cancel()
     {
         super.cancel();
-        if(currentView!=null&&currentView instanceof PopUpView)
+        if(currentView!=null&&currentView instanceof PopUpBaseView)
         {
-            ((PopUpView)currentView).onCancel();
+            ((PopUpBaseView)currentView).onCancel();
         }
     }
 

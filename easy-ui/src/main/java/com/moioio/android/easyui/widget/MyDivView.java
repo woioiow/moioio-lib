@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.moioio.android.easyui.UI;
 import com.moioio.android.easyui.UIConf;
 
 public class MyDivView extends MyView {
@@ -41,7 +42,7 @@ public class MyDivView extends MyView {
     public MyDivView setOrientation(int orientation)
     {
         layout.setOrientation(orientation);
-        if(LinearLayout.HORIZONTAL==orientation)
+        if(UI.HORIZONTAL==orientation)
         {
             layout.setGravity(Gravity.CENTER_VERTICAL);
         }
@@ -124,31 +125,64 @@ public class MyDivView extends MyView {
     }
 
 
-    public MyDivView setTextAttr(float size, int color, Shader shader, Drawable drawable)
+    private View getLastView()
     {
+        View view = null;
+        if(layout.getChildCount()>0)
+        {
+            view = layout.getChildAt(layout.getChildCount()-1);
+        }
+        return view;
+    }
+
+    private LinearLayout.LayoutParams getLastLayoutParams()
+    {
+        LinearLayout.LayoutParams layoutParams = null;
         if(layout.getChildCount()>0)
         {
             View view = layout.getChildAt(layout.getChildCount()-1);
-            if(view instanceof TextView)
-            {
-                TextView textView = (TextView)view;
-                if(size>0)
-                {
-                    textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
-                }
-                if(color!=0)
-                {
-                    textView.setTextColor(color);
-                }
-                if(shader!=null)
-                {
-                    textView.getPaint().setShader(shader);
-                }
-                if(drawable!=null)
-                {
-                    textView.setBackgroundDrawable(drawable);
-                }
-            }
+            layoutParams = (LinearLayout.LayoutParams)view.getLayoutParams();
+        }
+        return layoutParams;
+    }
+
+    private TextView getLastTextView()
+    {
+        View view = null;
+        if(layout.getChildCount()>0)
+        {
+            view = layout.getChildAt(layout.getChildCount()-1);
+        }
+        if(view instanceof TextView)
+        {
+            return (TextView)view;
+        }
+        return null;
+    }
+
+
+    public MyDivView setTextAttr(float size, int color, Shader shader, Drawable drawable)
+    {
+        TextView textView = getLastTextView();
+        if(textView==null)
+        {
+            return this;
+        }
+        if(size>0)
+        {
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
+        }
+        if(color!=0)
+        {
+            textView.setTextColor(color);
+        }
+        if(shader!=null)
+        {
+            textView.getPaint().setShader(shader);
+        }
+        if(drawable!=null)
+        {
+            textView.setBackgroundDrawable(drawable);
         }
         return this;
     }
@@ -157,33 +191,34 @@ public class MyDivView extends MyView {
 
     public MyDivView setMargins(int left, int top, int right, int bottom)
     {
-        if(layout.getChildCount()>0)
+        View view = getLastView();
+        LinearLayout.LayoutParams layoutParams = getLastLayoutParams();
+        if(view==null||layoutParams==null)
         {
-            View view = layout.getChildAt(layout.getChildCount()-1);
-            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)view.getLayoutParams();
-            if(left>=0)
-            {
-                layoutParams.leftMargin = left;
-            }
-
-            if(top>=0)
-            {
-                layoutParams.topMargin = top;
-            }
-
-            if(right>=0)
-            {
-                layoutParams.rightMargin = right;
-            }
-
-            if(bottom>=0)
-            {
-                layoutParams.bottomMargin = bottom;
-            }
-
-//            layoutParams.setMargins(left,top,right,bottom);
-            view.setLayoutParams(layoutParams);
+            return this;
         }
+
+        if(left>=0)
+        {
+            layoutParams.leftMargin = left;
+        }
+
+        if(top>=0)
+        {
+            layoutParams.topMargin = top;
+        }
+
+        if(right>=0)
+        {
+            layoutParams.rightMargin = right;
+        }
+
+        if(bottom>=0)
+        {
+            layoutParams.bottomMargin = bottom;
+        }
+        view.setLayoutParams(layoutParams);
+
         return this;
     }
 
@@ -251,25 +286,38 @@ public class MyDivView extends MyView {
     }
 
 
-    public MyDivView setText(String text, int index)
-    {
-        if(layout.getChildCount()>0)
-        {
-            View view = layout.getChildAt(index);
-            if(view instanceof TextView)
-            {
-                TextView textView = (TextView)view;
-                textView.setText(text);
-            }
-        }
-        return this;
-    }
+//    public MyDivView setText(String text, int index)
+//    {
+//        TextView textView = getLastTextView();
+//        if(textView==null)
+//        {
+//            return this;
+//        }
+//        textView.setText(text);
+//        return this;
+//    }
 
     public MyDivView setText(String text)
     {
-        return setText(text,layout.getChildCount()-1);
+        TextView textView = getLastTextView();
+        if(textView==null)
+        {
+            return this;
+        }
+        textView.setText(text);
+        return this;
     }
 
+    public MyDivView setSingleLine(boolean singleLine)
+    {
+        TextView textView = getLastTextView();
+        if(textView==null)
+        {
+            return this;
+        }
+        textView.setSingleLine(singleLine);
+        return this;
+    }
 
     public void setView(int index, View view) {
 
@@ -278,9 +326,19 @@ public class MyDivView extends MyView {
     }
 
     public void setView(int index, View view,int width,int height,int margin) {
-
         layout.removeViewAt(index);
         addView(view,index,width,height,margin);
+    }
+
+    public View getView(int index)
+    {
+        View view = layout.getChildAt(index);
+        return view;
+    }
+
+    public void removeView(int index)
+    {
+        layout.removeViewAt(index);
     }
 
 
