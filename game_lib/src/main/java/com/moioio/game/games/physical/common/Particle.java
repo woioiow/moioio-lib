@@ -1,4 +1,4 @@
-package com.moioio.physical.particle;
+package com.moioio.game.games.physical.common;
 
 public abstract class Particle {
 

@@ -12,7 +12,9 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.view.Window;
 
+import com.moioio.android.easyui.MyActivity;
 import com.moioio.util.MyLog;
 
 import java.io.BufferedReader;
@@ -24,11 +26,25 @@ import java.util.Collections;
 import java.util.Locale;
 import java.util.UUID;
 
-public class MainActivity extends Activity {
+public class MainActivity extends MyActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.setWindowStatusBarTrans();
+
+
+//        try {
+//            String json = "haha";//""[{\"duration\":60000,\"page_name\":\"com.shinyv.cnr.SongNewActivity\"}]";
+//            //C3FnalRIeHlm+0fibhwSIg==
+//            String str = PKCS7_Test.a(json);
+//            MyLog.debug(str);
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
 
         this.setContentView(new TestView(this));
 

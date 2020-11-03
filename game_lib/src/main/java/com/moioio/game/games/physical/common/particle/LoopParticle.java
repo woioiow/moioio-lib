@@ -1,15 +1,10 @@
-package com.moioio.physical.particle;
+package com.moioio.game.games.physical.common.particle;
 
 /**
  * 循环粒子
  */
 public class LoopParticle extends Particle {
 
-    float periodMax;
-
-   public void setPeriodMax(float period) {
-        this.periodMax = period;
-    }
 
 
     public void runPeriod() {
@@ -25,9 +20,6 @@ public class LoopParticle extends Particle {
         return false;
     }
 
-    public float getPeriodMax() {
-        return periodMax;
-    }
 
 
 }

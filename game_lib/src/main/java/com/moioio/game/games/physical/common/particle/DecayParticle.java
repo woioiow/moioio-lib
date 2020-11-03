@@ -1,4 +1,4 @@
-package com.moioio.physical.particle;
+package com.moioio.game.games.physical.common.particle;
 
 /**
  * 衰减粒子
@@ -6,22 +6,13 @@ package com.moioio.physical.particle;
 public class DecayParticle extends Particle {
 
 
-
-    public DecayParticle() {
-
-    }
-
-    public void setPeriod(int period) {
-        this.period = period;
-    }
-
-
     public void runPeriod() {
         if(this.period>0)
         {
-            this.period--;
+            this.period -= this.periodRate;
         }
     }
+
 
     public  boolean isDead()
     {

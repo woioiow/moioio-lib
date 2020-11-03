@@ -1,4 +1,4 @@
-package com.moioio.physical;
+package com.moioio.util;
 
 public class PhysicalUtil {
 
