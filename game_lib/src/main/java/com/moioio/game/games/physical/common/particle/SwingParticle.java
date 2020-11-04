@@ -7,9 +7,11 @@ public class SwingParticle extends LoopParticle{
 
 
     private boolean isBack;
+    private boolean isOnChange = true;
 
     @Override
     public void runPeriod() {
+        isOnChange = false;
         if(isBack)
         {
             this.period -= periodRate;
@@ -17,6 +19,7 @@ public class SwingParticle extends LoopParticle{
             {
                 this.period = 0;
                 isBack = false;
+                isOnChange = true;
             }
         }
         else
@@ -26,6 +29,7 @@ public class SwingParticle extends LoopParticle{
             {
                 this.period = periodMax;
                 isBack = true;
+                isOnChange = true;
             }
         }
     }
@@ -33,5 +37,16 @@ public class SwingParticle extends LoopParticle{
     @Override
     public boolean isDead() {
         return false;
+    }
+
+
+    public boolean isSwingBack()
+    {
+        return isBack;
+    }
+
+    public boolean isOnChange()
+    {
+        return isOnChange;
     }
 }

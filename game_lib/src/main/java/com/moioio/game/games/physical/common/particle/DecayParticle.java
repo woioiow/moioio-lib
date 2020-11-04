@@ -13,10 +13,16 @@ public class DecayParticle extends Particle {
         }
     }
 
+    public void setPeriodMax(float max) {
+        super.setPeriodMax(max);
+        this.setPeriod(max);
+    }
 
     public  boolean isDead()
     {
         return period<=0?true:false;
     }
+
+
 
 }

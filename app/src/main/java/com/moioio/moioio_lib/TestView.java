@@ -23,7 +23,7 @@ public class TestView extends MyView {
 
         gameView = new GameView(context);
 
-        gameView.setGame(SwingShootGame.class);
+        gameView.setGame(RotateShootGame.class);
 
 
         gameView.setLayoutParams(new MyLayout(UI.FILL_PARENT,UI.FILL_PARENT).get());

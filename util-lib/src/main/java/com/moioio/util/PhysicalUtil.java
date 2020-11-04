@@ -19,4 +19,15 @@ public class PhysicalUtil {
         }
         return angle;
     }
+
+    public static float getAntiAngle(float angle){
+        float antiAngel = (180+angle)%360;
+        return antiAngel;
+    }
+
+    public static boolean pointInRect(float rx,float ry,float rw,float rh,float x,float y)
+    {
+        return x >= rx && x < (rx+rw) && y >= ry && y < (ry+rh);
+    }
+
 }

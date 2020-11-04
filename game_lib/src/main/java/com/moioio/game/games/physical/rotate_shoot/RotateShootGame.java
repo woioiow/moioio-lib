@@ -1,51 +1,76 @@
 package com.moioio.game.games.physical.rotate_shoot;
 
-import android.content.Context;
 import android.graphics.Color;
 
+import com.moioio.android.easyui.widget.MyDrawView;
 import com.moioio.android.g2d.Graphics;
 import com.moioio.game.engine.GameEngine;
-import com.moioio.game.games.physical.common.Bomb;
-import com.moioio.game.games.physical.common.BombFireParticle;
-import com.moioio.util.MyLog;
+import com.moioio.game.games.physical.common.PhysicalGamePanel;
+import com.moioio.game.games.physical.common.shape.Bomb;
 
-public class RotateShootGame extends GameEngine
+public class RotateShootGame extends PhysicalGamePanel
 {
 
+    CentreBg centreBg;
+    ShootBall shootBall;
+    AimRing aimRing;
 
-    @Override
-    public boolean init() {
 
+    public boolean init()
+    {
+        centreBg = new CentreBg();
+        centreBg.setColor(Color.WHITE);
+        centreBg.setRadius(getWidth()*0.05f);
+        centreBg.setPosition(getWidth()/2,getHeight()/2);
+        this.addShape(centreBg);
+
+        aimRing = new AimRing();
+        aimRing.setColor(0xFF4D515C);
+        aimRing.setRadius(getWidth()*0.3f);
+        aimRing.setPosition(getWidth()/2,getHeight()/2);
+        aimRing.build();
+        this.addShape(aimRing);
+
+
+        shootBall = new ShootBall();
+        shootBall.setColor(Color.WHITE);
+        shootBall.setRadius(getWidth()*0.05f*0.4f);
+        shootBall.setAreaRectByPos(0,0,getWidth(),getHeight());
+        shootBall.setSpeed(aimRing.radius/10);
+        shootBall.setRotateCenter(getWidth()/2,getHeight()/2);
+        shootBall.setRotateRadius(centreBg.radius+shootBall.radius+10);
+        shootBall.setAimRing(aimRing);
+        shootBall.setGameEngine(this);
+        shootBall.build();
+        this.addShape(shootBall);
 
         return true;
-
     }
+
+
 
     @Override
     public void run() {
 
+        logicShapes();
     }
-
-
-    Bomb bomb;
 
     @Override
     public void paint(Graphics g) {
         g.setColor(Color.BLACK);
         g.fillRect(0,0,getWidth(),getHeight());
-        if(bomb==null)
-        {
-            bomb = new Bomb();
-            bomb.makeBomb(getWidth()/2,getHeight()/2);
-        }
-        bomb.draw(g);
+//        scorePanel.draw(g);
+        drawShapes(g);
     }
 
     @Override
     public void onTouch(int action, float x, float y) {
-//        if(bomb.isFinish())
+
+        if(action== MyDrawView.TOUCH_DOWN)
         {
-            bomb.makeBomb(x,y);
+            shootBall.shot();
+//            aimBall.stopMove();
+//            shapes.remove(swingPointer);
         }
     }
 
@@ -53,4 +78,5 @@ public class RotateShootGame extends GameEngine
     public void clear() {
 
     }
+
 }

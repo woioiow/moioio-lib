@@ -1,9 +1,11 @@
-package com.moioio.game.games.physical.swing_shoot;
+package com.moioio.game.games.physical.rotate_shoot;
 
 import com.moioio.android.g2d.Graphics;
 import com.moioio.game.games.physical.common.shape.Ball;
 
-class PointBall extends Ball {
+class CentreBg extends Ball {
+
+
     @Override
     public void draw(Graphics g) {
         g.setColor(color);

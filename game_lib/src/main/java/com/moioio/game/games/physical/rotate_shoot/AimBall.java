@@ -1,9 +1,11 @@
-package com.moioio.game.games.physical.swing_shoot;
+package com.moioio.game.games.physical.rotate_shoot;
 
 import com.moioio.android.g2d.Graphics;
 import com.moioio.game.games.physical.common.shape.Ball;
+import com.moioio.util.MyLog;
 
-class PointBall extends Ball {
+class AimBall extends Ball {
+    boolean isAim;
     @Override
     public void draw(Graphics g) {
         g.setColor(color);

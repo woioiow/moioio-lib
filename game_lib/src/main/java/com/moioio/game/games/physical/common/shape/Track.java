@@ -1,7 +1,6 @@
-package com.moioio.game.games.physical.common;
+package com.moioio.game.games.physical.common.shape;
 
 import com.moioio.android.g2d.Graphics;
-import com.moioio.game.games.physical.swing_shoot.TailBall;
 
 import java.util.ArrayList;
 import java.util.List;

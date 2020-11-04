@@ -9,6 +9,13 @@ public class RandomUtil {
         int which = Math.abs(rand.nextInt()%size);
         return which;
     }
+
+    public static int getRandomNoSign(int size) {
+        Random rand = new Random();
+        int which = rand.nextInt()%size;
+        return which;
+    }
+
     public static String getRandomStr(String[] letters)
     {
         Random rand = new Random();

@@ -2,7 +2,7 @@ package com.moioio.game.games.physical.common;
 
 import com.moioio.android.g2d.Graphics;
 import com.moioio.game.engine.GameEngine;
-import com.moioio.game.games.physical.swing_shoot.ShootBall;
+import com.moioio.game.games.physical.common.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;

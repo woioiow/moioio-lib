@@ -1,9 +1,9 @@
 package com.moioio.game.games.physical.swing_shoot;
 
 import com.moioio.android.g2d.Graphics;
-import com.moioio.game.games.physical.common.Shape;
+import com.moioio.game.games.physical.common.shape.Shape;
 
-public class TopBorder extends Shape {
+class TopBorder extends Shape {
 
 
     float width;

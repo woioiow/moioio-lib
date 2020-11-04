@@ -9,11 +9,13 @@ public abstract class GameEngine
     public static final long REFRESH_DELAY = 50L;
     public static int RESULT_FAIL = 0;
     public static int RESULT_SUCCESS = 1;
+    public static int RESULT_COMMON = 2;
 
     private float width;
     private float height;
     private Context context;
     private int result;
+    private int score;
     private boolean isInit;
 
     private long count;
@@ -95,6 +97,13 @@ public abstract class GameEngine
         return isInit;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
 //    public boolean isSecond()
 //    {

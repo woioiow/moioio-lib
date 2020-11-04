@@ -1,23 +1,39 @@
 package com.moioio.game.games.physical.swing_shoot;
 
 import com.moioio.android.g2d.Graphics;
-import com.moioio.game.games.physical.common.Ball;
+import com.moioio.game.games.physical.common.shape.Ball;
+import com.moioio.game.games.physical.common.shape.Bomb;
 import com.moioio.util.RandomUtil;
 
-public class AimBall extends Ball {
+class AimBall extends Ball {
 
     final static int STATUS_WAIT = 0;
     final static int STATUS_MOVE = 1;
     final static int STATUS_STOP = 2;
+    Bomb bomb;
+
+    public AimBall()
+    {
+        bomb = new Bomb();
+    }
 
     @Override
-    protected void draw(Graphics g) {
+    public void draw(Graphics g) {
+        if(isDead)
+        {
+            bomb.draw(g);
+            return;
+        }
         g.setColor(color);
         g.fillCircle(x,y,radius);
     }
 
     @Override
-    protected void logic() {
+    public void logic() {
+        if(isDead)
+        {
+            return;
+        }
         makeRandomMove();
     }
 
@@ -75,4 +91,16 @@ public class AimBall extends Ball {
         maxX = max;
     }
 
+    private boolean isDead;
+    public void dead() {
+        isDead = true;
+        bomb.setColor(color);
+        bomb.makeBomb(x,y);
+    }
+
+
+    public void revive() {
+        isDead = false;
+        status = STATUS_WAIT;
+    }
 }
