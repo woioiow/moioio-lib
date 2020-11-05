@@ -8,7 +8,7 @@ import java.util.List;
 public class Track {
 
     List<Shape> clearList;
-    List<Shape> dataList;
+    public List<Shape> dataList;
 
     public Track()
     {

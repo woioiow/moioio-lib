@@ -6,6 +6,7 @@ import com.moioio.android.easyui.widget.MyDrawView;
 import com.moioio.android.g2d.Graphics;
 import com.moioio.game.engine.GameEngine;
 import com.moioio.game.games.physical.common.PhysicalGamePanel;
+import com.moioio.game.games.physical.common.ScorePanel;
 import com.moioio.game.games.physical.common.shape.Bomb;
 
 public class RotateShootGame extends PhysicalGamePanel
@@ -14,10 +15,14 @@ public class RotateShootGame extends PhysicalGamePanel
     CentreBg centreBg;
     ShootBall shootBall;
     AimRing aimRing;
+    ScorePanel scorePanel;
 
 
     public boolean init()
     {
+
+
+
         centreBg = new CentreBg();
         centreBg.setColor(Color.WHITE);
         centreBg.setRadius(getWidth()*0.05f);
@@ -44,6 +49,12 @@ public class RotateShootGame extends PhysicalGamePanel
         shootBall.build();
         this.addShape(shootBall);
 
+
+        scorePanel = new ScorePanel();
+        scorePanel.setGameEngine(this);
+        scorePanel.setPosition(0,0);
+        scorePanel.setSize(getWidth(),getHeight()/2-aimRing.radius);
+
         return true;
     }
 
@@ -59,7 +70,7 @@ public class RotateShootGame extends PhysicalGamePanel
     public void paint(Graphics g) {
         g.setColor(Color.BLACK);
         g.fillRect(0,0,getWidth(),getHeight());
-//        scorePanel.draw(g);
+        scorePanel.draw(g);
         drawShapes(g);
     }
 

@@ -103,7 +103,7 @@ class ShootBall extends Ball {
             aimRing.dead();
             status = BACK;
             changeAngle(PhysicalUtil.getAntiAngle(angle));
-            changeSpeed(3*speedBak);
+            changeSpeed(1.5f*speedBak);
         }
     }
 

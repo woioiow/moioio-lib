@@ -9,7 +9,7 @@ public class ScorePanel extends BasePanel {
     @Override
     public void draw(Graphics g) {
 
-        g.setColor(0xFFFEFDFE);
+        g.setColor(0xFF4D515C);
         String str = String.valueOf(gameEngine.getScore());
         float fontSize = width/5;//g.getStringWidth(str);
         if(fontSize>height)
