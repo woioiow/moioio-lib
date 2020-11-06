@@ -156,7 +156,7 @@ class ShootBall extends Ball {
         if(count%5==0)
         {
             float na = (angle+270)%360;
-            tailBallTrack.addTail(x,y,color,radius*0.6f,na,15,1);
+            tailBallTrack.addTail(x,y,color,radius*0.6f,na,1,15,1);
         }
         tailBallTrack.logic();
     }

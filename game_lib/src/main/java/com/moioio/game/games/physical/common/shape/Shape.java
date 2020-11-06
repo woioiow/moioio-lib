@@ -9,8 +9,10 @@ public abstract class Shape {
 
     public float x;
     public float y;
-//    public float ox;
-//    public float oy;
+
+    public float width;
+    public float height;
+
     public int color;
 
 
@@ -183,5 +185,10 @@ public abstract class Shape {
         return ok;
     }
 
+    public void setRectSize(float w,float h)
+    {
+        this.width = w;
+        this.height = h;
 
+    }
 }

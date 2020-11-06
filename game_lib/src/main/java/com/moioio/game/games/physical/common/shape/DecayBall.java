@@ -4,6 +4,7 @@ import android.graphics.Color;
 
 import com.moioio.android.g2d.Graphics;
 import com.moioio.game.games.physical.common.particle.DecayParticle;
+import com.moioio.util.MyLog;
 
 public class DecayBall extends Ball {
 
@@ -18,6 +19,8 @@ public class DecayBall extends Ball {
     public void build()
     {
         makeSpeedXY();
+//        MyLog.debug("speedX:"+speedX);
+//        MyLog.debug("speedY:"+speedY);
         setAlphaRate(-alpha/decayParticle.getPeriodMax());
         setRadiusRate(-radius/decayParticle.getPeriodMax());
     }

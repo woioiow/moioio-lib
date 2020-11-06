@@ -5,13 +5,14 @@ import com.moioio.util.PhysicalUtil;
 public class TailBallTrack extends Track {
 
 
-    public void addTail(float x,float y,int color,float radius,float angle,float max,float rate)
+    public void addTail(float x,float y,int color,float radius,float angle,float speed,float max,float rate)
     {
 
         DecayBall data = new DecayBall();
         data.setAlpha(1);
         data.setColor(color);
         data.setRadius(radius);
+        data.setSpeed(speed);
         data.angle = angle;//PhysicalUtil.getAntiAngle(angle);
         data.setPeriodMax(max);
         data.setPeriodRate(rate);
