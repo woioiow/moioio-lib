@@ -1,6 +1,7 @@
 package com.moioio.game.games.physical.common.shape;
 
 import com.moioio.android.g2d.Graphics;
+import com.moioio.game.engine.GameEngine;
 import com.moioio.util.PhysicalUtil;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public abstract class Shape {
     public float orY;
     public float orH;
 
+    public GameEngine gameEngine;
 
 
 
@@ -191,4 +193,13 @@ public abstract class Shape {
         this.height = h;
 
     }
+
+    public void setGameEngine(GameEngine gameEngine) {
+        this.gameEngine = gameEngine;
+    }
+
+
+
+    public void build() {}
+
 }

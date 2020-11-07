@@ -65,10 +65,7 @@ class BirdBall extends Ball {
 
 
 
-    GameEngine gameEngine;
-    void setGameEngine(GameEngine gameEngine) {
-        this.gameEngine = gameEngine;
-    }
+
 
     void build() {
     }

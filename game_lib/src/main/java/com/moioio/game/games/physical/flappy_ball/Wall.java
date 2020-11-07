@@ -6,7 +6,7 @@ import com.moioio.game.games.physical.common.shape.Shape;
 import com.moioio.game.games.physical.common.shape.Track;
 import com.moioio.util.RandomUtil;
 
-public class Wall extends Shape {
+class Wall extends Shape {
 
     final static int AWAIT = 0;
     final static int SHOOT = 1;

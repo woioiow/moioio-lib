@@ -157,10 +157,6 @@ class ShootBall extends Ball {
         this.aimBall = aimBall;
     }
 
-    GameEngine gameEngine;
-    public void setGameEngine(GameEngine gameEngine) {
-        this.gameEngine = gameEngine;
-    }
 
     private float speedBak;
     public void build() {

@@ -103,7 +103,7 @@ class ShootBall extends Ball {
             aimRing.dead();
             status = BACK;
             changeAngle(PhysicalUtil.getAntiAngle(angle));
-            changeSpeed(1.5f*speedBak);
+            changeSpeed(speed);
         }
     }
 
@@ -115,7 +115,7 @@ class ShootBall extends Ball {
         if(distance<=rotateRadius)
         {
             changeAngle(PhysicalUtil.getAntiAngle(angle));
-            changeSpeed(speedBak);
+            changeSpeed(speed);
             build();
         }
 
@@ -128,24 +128,20 @@ class ShootBall extends Ball {
         this.aimRing = aimRing;
     }
 
-    GameEngine gameEngine;
-    public void setGameEngine(GameEngine gameEngine) {
-        this.gameEngine = gameEngine;
-    }
 
-    private float speedBak;
+//    private float speedBak;
     public void build() {
 
         status = AWAIT;
-        speedBak = speed;
+//        speedBak = speed;
     }
 
     void rotate()
     {
-        angle+=6;
+        angle+=5;
         if(angle>360)
         {
-            angle = 0;
+            angle = (angle%360);
         }
         double radians = Math.toRadians(angle);
         x = centerX+(float)(rotateRadius*Math.cos(radians));
@@ -156,21 +152,10 @@ class ShootBall extends Ball {
         if(count%5==0)
         {
             float na = (angle+270)%360;
-            tailBallTrack.addTail(x,y,color,radius*0.6f,na,1,15,1);
+            tailBallTrack.addTail(x,y,color,radius*0.6f,na,0,15,1);
         }
         tailBallTrack.logic();
     }
 
 
-    float centerX;
-    float centerY;
-    public void setRotateCenter(float x, float y) {
-        this.centerX = x;
-        this.centerY = y;
-    }
-
-    float rotateRadius;
-    public void setRotateRadius(float r) {
-        this.rotateRadius = r;
-    }
 }

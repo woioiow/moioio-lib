@@ -19,9 +19,6 @@ class CatcherRing extends Ball {
 
     final static int AWAIT = 0;
     final static int OVER = 3;
-
-
-
     int status;
 
     Bomb bomb;
@@ -102,10 +99,7 @@ class CatcherRing extends Ball {
         this.aimRing = aimRing;
     }
 
-    GameEngine gameEngine;
-    public void setGameEngine(GameEngine gameEngine) {
-        this.gameEngine = gameEngine;
-    }
+
 
     CatcherBall topBall;
     CatcherBall bottomBall;
@@ -151,15 +145,5 @@ class CatcherRing extends Ball {
     }
 
 
-    float centerX;
-    float centerY;
-    public void setRotateCenter(float x, float y) {
-        this.centerX = x;
-        this.centerY = y;
-    }
 
-    float rotateRadius;
-    public void setRotateRadius(float r) {
-        this.rotateRadius = r;
-    }
 }

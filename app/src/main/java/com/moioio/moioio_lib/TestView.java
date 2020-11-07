@@ -8,6 +8,7 @@ import com.moioio.android.easyui.widget.MyView;
 import com.moioio.game.GameView;
 import com.moioio.game.games.physical.circle_catch.CircleCatchGame;
 import com.moioio.game.games.physical.flappy_ball.FlappyBallGame;
+import com.moioio.game.games.physical.landing_ball.LandingBallGame;
 import com.moioio.game.games.physical.rotate_shoot.RotateShootGame;
 import com.moioio.game.games.physical.swing_shoot.SwingShootGame;
 
@@ -25,7 +26,7 @@ public class TestView extends MyView {
 
         gameView = new GameView(context);
 
-        gameView.setGame(FlappyBallGame.class);
+        gameView.setGame(RotateShootGame.class);
 
 
         gameView.setLayoutParams(new MyLayout(UI.FILL_PARENT,UI.FILL_PARENT).get());

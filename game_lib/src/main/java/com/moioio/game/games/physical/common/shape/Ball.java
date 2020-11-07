@@ -6,6 +6,9 @@ public abstract class Ball extends Shape {
 
     public float radius;
     public float radiusRate;
+    public float centerX;
+    public float centerY;
+    public float rotateRadius;
 
 
     public void setRadius(float radius) {
@@ -43,6 +46,13 @@ public abstract class Ball extends Shape {
         return ok;
     }
 
+    public void setRotateCenter(float x, float y) {
+        this.centerX = x;
+        this.centerY = y;
+    }
 
+    public void setRotateRadius(float r) {
+        this.rotateRadius = r;
+    }
 
 }
