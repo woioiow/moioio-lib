@@ -1,4 +1,4 @@
-package com.moioio.game.games.physical.circle_catch;
+package com.moioio.game.games.physical.ring_catch;
 
 import android.graphics.Color;
 
@@ -7,7 +7,7 @@ import com.moioio.android.g2d.Graphics;
 import com.moioio.game.games.physical.common.PhysicalGamePanel;
 import com.moioio.game.games.physical.common.ScorePanel;
 
-public class CircleCatchGame extends PhysicalGamePanel
+public class RingCatchGame extends PhysicalGamePanel
 {
 
     CatcherRing catcherRing;

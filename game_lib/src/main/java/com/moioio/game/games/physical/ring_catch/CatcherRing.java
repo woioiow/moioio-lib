@@ -1,5 +1,5 @@
 
-package com.moioio.game.games.physical.circle_catch;
+package com.moioio.game.games.physical.ring_catch;
 
 import android.graphics.Color;
 
@@ -7,12 +7,7 @@ import com.moioio.android.g2d.Graphics;
 import com.moioio.game.engine.GameEngine;
 import com.moioio.game.games.physical.common.shape.Ball;
 import com.moioio.game.games.physical.common.shape.Bomb;
-import com.moioio.game.games.physical.common.shape.TailBallTrack;
 import com.moioio.util.PhysicalUtil;
-import com.moioio.util.RandomUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 class CatcherRing extends Ball {
