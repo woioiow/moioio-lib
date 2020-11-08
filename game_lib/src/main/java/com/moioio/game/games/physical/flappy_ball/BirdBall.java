@@ -67,9 +67,6 @@ class BirdBall extends Ball {
 
 
 
-    void build() {
-    }
-
 
     void changeDir() {
 

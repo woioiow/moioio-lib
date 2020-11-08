@@ -8,7 +8,7 @@ import com.moioio.game.games.physical.common.shape.Shape;
 import com.moioio.util.PhysicalUtil;
 import com.moioio.util.RandomUtil;
 
-public class Block extends Shape {
+class Block extends Shape {
 
     LineBlock topBlock;
     LineBlock bottomBlock;

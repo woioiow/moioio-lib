@@ -202,4 +202,14 @@ public abstract class Shape {
 
     public void build() {}
 
+    Object tag;
+    public void setTag(Object tag) {
+
+        this.tag = tag;
+    }
+
+    public Object getTag()
+    {
+        return tag;
+    }
 }

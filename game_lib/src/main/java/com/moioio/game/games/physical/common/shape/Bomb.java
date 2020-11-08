@@ -54,19 +54,15 @@ public class Bomb {
         rlist.clear();
     }
 
-
-
-    public void makeBomb(float x,float y)
+    public void addBomb(float x,float y)
     {
-        particles.clear();
-        rlist.clear();
         int size = 15+ RandomUtil.getRandom(20);
         int num = (int) (360f/15f);
         for(int i=0;i<size;i++)
         {
 
             int index = RandomUtil.getRandom(colors.size());
-            MyLog.debug("index::"+index);
+
             int color = colors.get(index);
 
             float angle = RandomUtil.getRandom(num)*15f;
@@ -86,6 +82,14 @@ public class Bomb {
 
             particles.add(data);
         }
+    }
+
+
+    public void makeBomb(float x,float y)
+    {
+        particles.clear();
+        rlist.clear();
+        addBomb(x,y);
     }
 
     public boolean isDead()
