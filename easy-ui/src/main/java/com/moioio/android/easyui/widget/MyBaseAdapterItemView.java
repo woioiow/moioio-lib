@@ -11,7 +11,6 @@ public abstract class MyBaseAdapterItemView extends MyView {
     }
 
 
-
     public abstract void setData(Object obj);
 
 
