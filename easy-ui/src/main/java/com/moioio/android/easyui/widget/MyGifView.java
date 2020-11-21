@@ -13,15 +13,62 @@ import com.moioio.android.easyui.UIConf;
 import com.moioio.android.easyui.widget.gif.GifDecoder;
 import com.moioio.util.CodeUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MyGifView extends MyView implements Runnable {
 
     private ImageView imageView;
-    GifDecoder gifDecoder;
-    Bitmap gifBufferImg;
+    private GifDecoder gifDecoder;
+    private Bitmap gifBufferImg;
+    private boolean isShow;
+    private String path;
+    private boolean isLoad;
+    private int delay;
+    private int step;
 
-    TimerHandler timer;
 
+    private class GifTimer implements Runnable{
+
+        TimerHandler timer;
+        List<MyGifView> views = new ArrayList<>();
+
+        GifTimer()
+        {
+            timer = new TimerHandler(this,50, ViewUtil.getId());
+        }
+
+        @Override
+        public void run() {
+            for(MyGifView view:views)
+            {
+                if(view.isShow)
+                {
+                    view.run();
+                }
+            }
+
+        }
+
+        public void add(MyGifView myGifView) {
+            if(!views.contains(myGifView)){
+                views.add(myGifView);
+            }
+        }
+
+        public void remove(MyGifView myGifView) {
+            if(views.contains(myGifView)){
+                views.remove(myGifView);
+            }
+        }
+
+        public void start() {
+            timer.start();
+        }
+    }
+
+    static GifTimer gifTimer;
 
     public MyGifView(Context context) {
         super(context);
@@ -45,12 +92,14 @@ public class MyGifView extends MyView implements Runnable {
 
         this.addView(imageView);
 
-        timer = new TimerHandler(this,10, ViewUtil.getId());
+        if(gifTimer==null)
+        {
+            gifTimer = new GifTimer();
+        }
+
     }
 
 
-    private String path;
-    private boolean isLoad;
     public void load(String path)
     {
         String md5 = CodeUtil.getStringMD5(path);
@@ -72,27 +121,31 @@ public class MyGifView extends MyView implements Runnable {
 
         if(gifBufferImg!=null)
         {
-            gifDecoder.loop();
-            gifDecoder.freshBufferedImage();
-            imageView.setImageBitmap(gifBufferImg);
+            step++;
+            if(step>delay)
+            {
+                step = 0;
+                gifDecoder.loop();
+                gifDecoder.freshBufferedImage();
+                imageView.setImageBitmap(gifBufferImg);
+            }
         }
     }
 
 
-    public void onVisibilityChanged(View changedView, int visibility)
+    public void onShow()
     {
-        super.onVisibilityChanged(changedView,visibility);
+        isShow = true;
+        gifTimer.add(this);
+        gifTimer.start();
+    }
+    public void onHide()
+    {
+        isShow = false;
+        gifTimer.remove(this);
+    }
 
-        if(timer!=null)
-        {
-            if(visibility== View.VISIBLE)
-            {
-                timer.start();
-            }
-            else
-            {
-                timer.stop();
-            }
-        }
+    public void setDelay(int delay) {
+        this.delay = delay;
     }
 }

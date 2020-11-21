@@ -3,6 +3,7 @@ package com.moioio.moioio_lib;
 import android.content.Context;
 
 import com.moioio.android.easyui.UI;
+import com.moioio.android.easyui.widget.MyGifView;
 import com.moioio.android.easyui.widget.MyLayout;
 import com.moioio.android.easyui.widget.MyView;
 
@@ -14,9 +15,14 @@ public class TestView extends MyView {
         super(context);
     }
 
+    MyGifView myGifView;
     @Override
     public void initPage(Context context) {
 
+        myGifView = new MyGifView(context);
+        myGifView.load("assets://ic_game.gif");
+        myGifView.setDelay(0);
+        myGifView.makeLayout().center();
 
 //        gameView = new GameView(context);
 //
@@ -42,7 +48,7 @@ public class TestView extends MyView {
 //
 //        });
 //
-//        this.addView(btn);
+        this.addView(myGifView);
 
     }
 }
