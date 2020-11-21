@@ -1,13 +1,12 @@
 package com.moioio.android.easyui.widget;
 
+import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.moioio.android.easyui.UI;
 import com.moioio.android.easyui.UIConf;
 
 public class MyLayout {
-
-
-
 
 
     private RelativeLayout.LayoutParams layoutParams;
@@ -38,6 +37,61 @@ public class MyLayout {
     public MyLayout addRule(int rule)
     {
         layoutParams.addRule(rule);
+        return this;
+    }
+
+    public MyLayout below(View view)
+    {
+        addRule(UI.BELOW,view.getId());
+        return this;
+    }
+
+    public MyLayout above(View view)
+    {
+        addRule(UI.ABOVE,view.getId());
+        return this;
+    }
+
+    public MyLayout center()
+    {
+        addRule(UI.CENTER_IN_PARENT);
+        return this;
+    }
+
+    public MyLayout centerH()
+    {
+        addRule(UI.CENTER_HORIZONTAL);
+        return this;
+    }
+
+    public MyLayout centerV()
+    {
+        addRule(UI.CENTER_VERTICAL);
+        return this;
+    }
+
+
+    public MyLayout left()
+    {
+        addRule(UI.ALIGN_PARENT_LEFT);
+        return this;
+    }
+
+    public MyLayout right()
+    {
+        addRule(UI.ALIGN_PARENT_RIGHT);
+        return this;
+    }
+
+    public MyLayout bottom()
+    {
+        addRule(UI.ALIGN_PARENT_BOTTOM);
+        return this;
+    }
+
+    public MyLayout top()
+    {
+        addRule(UI.ALIGN_PARENT_TOP);
         return this;
     }
 

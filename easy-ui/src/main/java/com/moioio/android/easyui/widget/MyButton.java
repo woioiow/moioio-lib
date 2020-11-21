@@ -2,6 +2,8 @@ package com.moioio.android.easyui.widget;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.moioio.android.easyui.UI;
@@ -44,6 +46,33 @@ public class MyButton extends MyView{
     {
         textView.setTextColor(ViewUtil.getClickColor(ViewUtil.getAntiColor(color),color));
     }
+
+    public void setTextMargin(int margin)
+    {
+        RelativeLayout.LayoutParams params = (LayoutParams) textView.getLayoutParams();
+        params.topMargin = margin;
+        params.bottomMargin = margin;
+        params.leftMargin = margin;
+        params.rightMargin = margin;
+        textView.setLayoutParams(params);
+    }
+
+    public void setTextMargin(int top,int bottom,int left,int right)
+    {
+        RelativeLayout.LayoutParams params = (LayoutParams) textView.getLayoutParams();
+        params.topMargin = top;
+        params.bottomMargin = bottom;
+        params.leftMargin = left;
+        params.rightMargin = right;
+        textView.setLayoutParams(params);
+    }
+
+    public TextView getTextView()
+    {
+        return textView;
+    }
+
+
 
     public void setText(String text)
     {

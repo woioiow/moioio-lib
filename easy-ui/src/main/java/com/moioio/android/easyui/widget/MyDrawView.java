@@ -8,6 +8,7 @@ import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.moioio.android.easyui.UIConf;
 import com.moioio.android.g2d.Graphics;
 import com.moioio.android.util.ViewUtil;
 
@@ -24,8 +25,26 @@ public abstract class MyDrawView extends View
     public static final int TOUCH_MOVE = 2;
     public static final int TOUCH_UP = 3;
     private SparseArray<PointF> multiTouchPoints;
+    private MyLayout MyLayout;
 
+    public MyLayout makeLayout(int width, int height)
+    {
+        MyLayout = new MyLayout(width,height);
+        this.setLayoutParams(MyLayout.get());
+        return MyLayout;
+    }
 
+    public MyLayout getMyLayout()
+    {
+        return MyLayout;
+    }
+
+    public MyLayout makeLayout()
+    {
+        MyLayout = new MyLayout(UIConf.WRAP_CONTENT, UIConf.WRAP_CONTENT);
+        this.setLayoutParams(MyLayout.get());
+        return MyLayout;
+    }
 
     public MyDrawView(Context context)
     {

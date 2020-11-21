@@ -14,15 +14,17 @@ import com.moioio.android.util.ViewUtil;
 public abstract class MyView extends RelativeLayout {
 
 
-    public MyLayout MyLayout;
+    private MyLayout MyLayout;
     private boolean isInited;
     private int margin;
+    private int line;
 
 
     public MyView(Context context) {
         super(context);
-        margin = DisplayUtil.getDip(getContext(),5);
-        initPage(getContext());
+        margin = DisplayUtil.getDip(context,5);
+        line = DisplayUtil.getDip(context,1);
+        initPage(context);
         ViewUtil.setViewID(this);
     }
 
@@ -111,5 +113,8 @@ public abstract class MyView extends RelativeLayout {
 
     public int defaultMargin() {
         return margin;
+    }
+    public int defaultLine() {
+        return line;
     }
 }

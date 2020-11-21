@@ -29,5 +29,4 @@ dependencies {
     implementation project(':easy-ui')
     implementation project(':util-lib')
     implementation project(path: ':easy-ui')
-    implementation project(path: ':game_lib')
 }

@@ -5,13 +5,10 @@ import android.content.Context;
 import com.moioio.android.easyui.UI;
 import com.moioio.android.easyui.widget.MyLayout;
 import com.moioio.android.easyui.widget.MyView;
-import com.moioio.game.GameView;
-import com.moioio.game.games.physical.remember_touch.RememberTouchGame;
-import com.moioio.game.games.physical.rotate_shoot.RotateShootGame;
 
 public class TestView extends MyView {
 
-    private GameView gameView;
+//    private GameView gameView;
 
     public TestView(Context context) {
         super(context);
@@ -21,14 +18,14 @@ public class TestView extends MyView {
     public void initPage(Context context) {
 
 
-        gameView = new GameView(context);
-
-        gameView.setGame(RememberTouchGame.class);
-
-
-        gameView.setLayoutParams(new MyLayout(UI.FILL_PARENT,UI.FILL_PARENT).get());
-
-        this.addView(gameView);
+//        gameView = new GameView(context);
+//
+//        gameView.setGame(RememberTouchGame.class);
+//
+//
+//        gameView.setLayoutParams(new MyLayout(UI.FILL_PARENT,UI.FILL_PARENT).get());
+//
+//        this.addView(gameView);
 
 
 
