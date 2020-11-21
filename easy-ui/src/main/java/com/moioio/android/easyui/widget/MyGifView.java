@@ -36,7 +36,7 @@ public class MyGifView extends MyView implements Runnable {
 
         GifTimer()
         {
-            timer = new TimerHandler(this,50, ViewUtil.getId());
+            timer = new TimerHandler(this,10, ViewUtil.getId());
         }
 
         @Override
@@ -66,6 +66,11 @@ public class MyGifView extends MyView implements Runnable {
         public void start() {
             timer.start();
         }
+    }
+
+    public static void setTimerDelay(long m)
+    {
+        gifTimer.timer.setDelay(m);
     }
 
     static GifTimer gifTimer;
