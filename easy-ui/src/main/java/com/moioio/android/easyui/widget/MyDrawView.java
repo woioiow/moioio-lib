@@ -1,5 +1,6 @@
 package com.moioio.android.easyui.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
@@ -45,6 +46,28 @@ public abstract class MyDrawView extends View
         this.setLayoutParams(MyLayout.get());
         return MyLayout;
     }
+
+    public void show()
+    {
+        this.setVisibility(VISIBLE);
+    }
+
+    public void hide()
+    {
+        this.setVisibility(INVISIBLE);
+    }
+
+    public void gone()
+    {
+        this.setVisibility(GONE);
+    }
+
+    public Activity getActivity()
+    {
+        return (Activity)getContext();
+    }
+
+
 
     public MyDrawView(Context context)
     {

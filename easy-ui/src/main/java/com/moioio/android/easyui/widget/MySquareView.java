@@ -14,8 +14,6 @@ public class MySquareView extends MyView {
     }
 
 
-
-
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, widthMeasureSpec);
     }

@@ -1,6 +1,8 @@
 package com.moioio.android.easyui.widget;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.View;
 import android.widget.GridView;
 import android.widget.ListView;
 
@@ -32,6 +34,46 @@ public class MyGridView extends GridView {
         MyLayout = new MyLayout(UIConf.WRAP_CONTENT, UIConf.WRAP_CONTENT);
         this.setLayoutParams(MyLayout.get());
         return MyLayout;
+    }
+
+    public void show()
+    {
+        this.setVisibility(VISIBLE);
+    }
+
+    public void hide()
+    {
+        this.setVisibility(INVISIBLE);
+    }
+
+    public void gone()
+    {
+        this.setVisibility(GONE);
+    }
+
+    public Activity getActivity()
+    {
+        return (Activity)getContext();
+    }
+
+    protected void onVisibilityChanged(View changedView, int visibility) {
+        if(visibility==VISIBLE)
+        {
+            onShow();
+        }
+        else
+        {
+            onHide();
+        }
+    }
+
+    public void onShow()
+    {
+    }
+
+    public void onHide()
+    {
+
     }
 
 }

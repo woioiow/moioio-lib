@@ -3,16 +3,15 @@ package com.moioio.android.easyui.widget;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.HorizontalScrollView;
+import android.widget.ScrollView;
 
 import com.moioio.android.easyui.UIConf;
 import com.moioio.android.util.ViewUtil;
 
-public class MyImageView extends ImageView {
+public class MyHorizontalScrollView extends HorizontalScrollView {
 
-    public MyImageView(Context context) {
+    public MyHorizontalScrollView(Context context) {
         super(context);
         ViewUtil.setViewID(this);
     }
@@ -37,7 +36,6 @@ public class MyImageView extends ImageView {
         this.setLayoutParams(MyLayout.get());
         return MyLayout;
     }
-
 
     public void show()
     {
@@ -78,4 +76,5 @@ public class MyImageView extends ImageView {
     {
 
     }
+
 }

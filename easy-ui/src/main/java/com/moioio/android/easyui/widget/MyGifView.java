@@ -61,6 +61,11 @@ public class MyGifView extends MyView implements Runnable {
             if(views.contains(myGifView)){
                 views.remove(myGifView);
             }
+
+            if(views.size()==0)
+            {
+                timer.stop();
+            }
         }
 
         public void start() {
