@@ -45,6 +45,16 @@ public class ViewUtil {
         return pd;
     }
 
+    public static Drawable makeRoundBord(float[] radius, int size, int color)
+    {
+        GradientDrawable pd = new GradientDrawable();
+        pd.setCornerRadii(radius);
+        pd.setStroke(size,color);
+//        pd.setColor(color);
+        return pd;
+    }
+
+
     public static Drawable makeRoundDrawableBord(float radius, int size, int bordcolor, int color)
     {
         GradientDrawable pd = new GradientDrawable();
