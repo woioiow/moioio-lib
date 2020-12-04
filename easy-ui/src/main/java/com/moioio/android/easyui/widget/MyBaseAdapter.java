@@ -9,12 +9,13 @@ import android.widget.BaseAdapter;
 import com.moioio.util.MyLog;
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 public class MyBaseAdapter extends BaseAdapter {
 
-    private Vector dataList;
+    private List dataList;
     private Context context;
     private Class viewCLZ;
     private ViewHolder viewHolder;
@@ -24,7 +25,7 @@ public class MyBaseAdapter extends BaseAdapter {
     public MyBaseAdapter(Context context)
     {
         this.context = context;
-        dataList = new Vector();
+        dataList = new ArrayList();
     }
 
     public void setItemViewClass(Class clz)
@@ -44,7 +45,7 @@ public class MyBaseAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return dataList.elementAt(i);
+        return dataList.get(i);
     }
 
     @Override
@@ -63,6 +64,7 @@ public class MyBaseAdapter extends BaseAdapter {
                 viewHolder = new ViewHolder();
                 Constructor con = viewCLZ.getConstructor(Context.class);
                 convertView = (MyBaseAdapterItemView)con.newInstance(context);
+                ((MyBaseAdapterItemView)convertView).setAdapter(this);
                 viewHolder.view = (MyBaseAdapterItemView)convertView;
                 convertView.setTag(viewHolder);
             }
@@ -77,16 +79,19 @@ public class MyBaseAdapter extends BaseAdapter {
         }
         if(viewHolder.view!=null)
         {
-            viewHolder.view.setData(dataList.elementAt(position));
+            viewHolder.view.setData(dataList.get(position));
         }
 
         if(listener!=null)
         {
             if(position==(getCount()-1))
             {
-                if(listener.haveMore())
+                if(!listener.loading())
                 {
-                    listener.loadMore();
+                    if(listener.haveMore())
+                    {
+                        listener.loadMore();
+                    }
                 }
             }
         }
@@ -104,21 +109,31 @@ public class MyBaseAdapter extends BaseAdapter {
     }
 
     public void addData(Object data) {
-        dataList.addElement(data);
+        dataList.add(data);
     }
 
     public void removeAll() {
-        dataList.removeAllElements();
+        dataList.clear();
+    }
+
+
+    public void remove(int index) {
+        dataList.remove(index);
+    }
+
+    public void remove(Object obj) {
+        if(dataList.contains(obj))
+        {
+            dataList.remove(obj);
+        }
     }
 
     public void setAll(List all) {
         for(Object obj:all)
         {
-            dataList.addElement(obj);
+            dataList.add(obj);
         }
     }
-
-
 
     class ViewHolder {
         private MyBaseAdapterItemView view;

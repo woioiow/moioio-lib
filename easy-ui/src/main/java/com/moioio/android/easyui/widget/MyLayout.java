@@ -52,6 +52,19 @@ public class MyLayout {
         return this;
     }
 
+
+    public MyLayout rightOf(View view)
+    {
+        addRule(UI.RIGHT_OF,view.getId());
+        return this;
+    }
+
+    public MyLayout leftOf(View view)
+    {
+        addRule(UI.LEFT_OF,view.getId());
+        return this;
+    }
+
     public MyLayout center()
     {
         addRule(UI.CENTER_IN_PARENT);

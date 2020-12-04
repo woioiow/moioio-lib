@@ -4,4 +4,5 @@ public interface MyBaseAdapterListener {
 
     public boolean haveMore();
     public void loadMore();
+    public boolean loading();
 }

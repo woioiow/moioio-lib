@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.DashPathEffect;
+import android.graphics.MaskFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -22,6 +23,7 @@ import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.graphics.Xfermode;
 import android.os.Build;
 import android.text.TextPaint;
 
@@ -40,7 +42,7 @@ public class Graphics
 
     Canvas grap ;
     public Paint paint = new Paint();
-    public TextPaint textPaint = new TextPaint();
+//    public TextPaint textPaint = new TextPaint();
 
 
 
@@ -60,9 +62,9 @@ public class Graphics
         paint.setAntiAlias(true);
         paint.setDither(true);
 
-        textPaint = new TextPaint();
-        textPaint.setAntiAlias(true);
-        textPaint.setDither(true);
+//        textPaint = new TextPaint();
+//        textPaint.setAntiAlias(true);
+//        textPaint.setDither(true);
     }
 
     public Graphics(Canvas canvas)
@@ -72,9 +74,9 @@ public class Graphics
         paint.setAntiAlias(true);
         paint.setDither(true);
 
-        textPaint = new TextPaint();
-        textPaint.setAntiAlias(true);
-        textPaint.setDither(true);
+//        textPaint = new TextPaint();
+//        textPaint.setAntiAlias(true);
+//        textPaint.setDither(true);
 
     }
     //09-28 16:48:05.894: W/System.err(1356): java.lang.IllegalStateException: Immutable bitmap passed to Canvas constructor
@@ -101,27 +103,43 @@ public class Graphics
     public void setXfermode(int type)
     {
 //        paint.setXfermode()
+//        paint.setXfermode()
+//        gra
+//        grap2d.setComposite(AlphaComposite.getInstance(AlphaComposite.Xor, 0.5f));
+    }
+
+    public void setXfermode(Xfermode xfermode)
+    {
+        paint.setXfermode(xfermode);
+//        paint.setXfermode()
 //        gra
 //        grap2d.setComposite(AlphaComposite.getInstance(AlphaComposite.Xor, 0.5f));
     }
 
 
+
     public void setColor(int ARGB) {
         paint.setColor(ARGB);
-        textPaint.setColor(ARGB);
+//        textPaint.setColor(ARGB);
     }
 
     public void setAlpha(float value) {
         int alpha = (int)(255*value);
         paint.setAlpha(alpha);
-        textPaint.setAlpha(alpha);
+//        textPaint.setAlpha(alpha);
     }
 
 
 
     public void setMaskFilter(BlurMaskFilter blur) {
         paint.setMaskFilter(blur);
-        textPaint.setMaskFilter(blur);
+//        textPaint.setMaskFilter(blur);
+
+    }
+
+    public void setMaskFilter(MaskFilter blur) {
+        paint.setMaskFilter(blur);
+//        textPaint.setMaskFilter(blur);
 
     }
 
@@ -272,45 +290,45 @@ public class Graphics
 
     public void setFontSize(float anInt) {
         paint.setTextSize(anInt);
-        textPaint.setTextSize(anInt);
+//        textPaint.setTextSize(anInt);
 
     }
 
     public float getFontSize()
     {
-        return textPaint.getTextSize();
+        return paint.getTextSize();
     }
 
     public void setTypeface(Typeface typeface) {
         paint.setTypeface(typeface);
-        textPaint.setTypeface(typeface);
+//        textPaint.setTypeface(typeface);
     }
 
     Rect fontTmpRect = new Rect();
     public void drawString(String str,float x,float y) {
-        textPaint.setStyle(Paint.Style.FILL);
-        textPaint.getTextBounds(str, 0, str.length(), fontTmpRect);
+        paint.setStyle(Paint.Style.FILL);
+        paint.getTextBounds(str, 0, str.length(), fontTmpRect);
         float dx = x+offX  - fontTmpRect.left;
         float dy = y+offY + fontTmpRect.height() - fontTmpRect.bottom;
-        grap.drawText(str,dx,dy,textPaint);
+        grap.drawText(str,dx,dy,paint);
     }
 
 
     public void drawStrokeString(String str,float x,float y,float width) {
-        textPaint.setStyle(Paint.Style.STROKE);
-        textPaint.setStrokeWidth(width);
-        textPaint.getTextBounds(str, 0, str.length(), fontTmpRect);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(width);
+        paint.getTextBounds(str, 0, str.length(), fontTmpRect);
         float dx = x+offX  - fontTmpRect.left;
         float dy = y+offY + fontTmpRect.height() - fontTmpRect.bottom;
-        grap.drawText(str,dx,dy,textPaint);
-        textPaint.setStrokeWidth(0);
+        grap.drawText(str,dx,dy,paint);
+        paint.setStrokeWidth(0);
     }
 
 
     public int getStringWidth(String str)
     {
         Rect rect = new Rect();
-        textPaint.getTextBounds(str, 0, str.length(), rect);
+        paint.getTextBounds(str, 0, str.length(), rect);
 //        paint.getTextBounds(str, 0, str.length(), rect);
         return rect.width();
     }
@@ -318,7 +336,7 @@ public class Graphics
     public int getStringHeight(String str)
     {
         Rect rect = new Rect();
-        textPaint.getTextBounds(str, 0, str.length(), rect);
+        paint.getTextBounds(str, 0, str.length(), rect);
 //        paint.getTextBounds(str, 0, str.length(), rect);
         return rect.height();
     }
@@ -341,7 +359,7 @@ public class Graphics
     public void setColorMatrix(ColorMatrix colorMatrix) {
 
         paint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
-        textPaint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
+//        paint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
 
     }
 
@@ -349,30 +367,29 @@ public class Graphics
 
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP)
         {
-            textPaint.setLetterSpacing(space);
+            paint.setLetterSpacing(space);
         }
     }
 
     public void setFakeBoldText(boolean b) {
-        textPaint.setFakeBoldText(b);
+        paint.setFakeBoldText(b);
 
     }
 
     public void setTextSkewX(float v) {
-        textPaint.setTextSkewX(v);
+        paint.setTextSkewX(v);
     }
 
     public void setUnderlineText(boolean b) {
-        textPaint.setUnderlineText(b);
+        paint.setUnderlineText(b);
     }
 
     public void setShader(Shader shader) {
         paint.setShader(shader);
-        textPaint.setShader(shader);
     }
 
     public void setStrokeWidth(float width) {
-        textPaint.setStrokeWidth(width);
+        paint.setStrokeWidth(width);
     }
 
     public void setMatrix(Matrix matrix) {
@@ -381,7 +398,6 @@ public class Graphics
 
     public void setShadowLayer(float radius, float dx, float dy,  int shadowColor) {
         paint.setShadowLayer(radius,dx,dy,shadowColor);
-        textPaint.setShadowLayer(radius,dx,dy,shadowColor);
     }
 
     public void setClipArea(Path path)
