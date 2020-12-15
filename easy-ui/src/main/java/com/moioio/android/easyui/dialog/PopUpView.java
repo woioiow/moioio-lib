@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 
 import com.moioio.android.easyui.UIConf;
 import com.moioio.android.easyui.widget.MyLayout;
+import com.moioio.android.easyui.widget.MyLayoutView;
 import com.moioio.android.easyui.widget.MyView;
 import com.moioio.android.util.DisplayUtil;
 import com.moioio.android.util.ViewUtil;
@@ -17,7 +18,7 @@ public abstract class PopUpView extends PopUpBaseView {
     private int viewWidth = 0;
     private int viewHeight = 0;
     private LayoutParams layout_params;
-    private RelativeLayout layout;
+    private MyLayoutView layout;
 
     public PopUpView(Context context) {
         super(context);
@@ -27,7 +28,7 @@ public abstract class PopUpView extends PopUpBaseView {
     public void initPage(Context context) {
 
         this.setBackgroundColor(UIConf.POPUP_BG_COLOR);
-        layout = new RelativeLayout(context);
+        layout = new MyLayoutView(context);
 //        layout.setBackgroundDrawable(ViewUtil.makeRoundDrawable(GradientDrawable.Orientation.BL_TR,30,new int[]{0xFF110735,0xFF1A0040}));
 //        layout.setBackgroundDrawable(ViewUtil.makeRoundDrawable(30,0xFF202020));//
 
@@ -59,6 +60,12 @@ public abstract class PopUpView extends PopUpBaseView {
 
             }
         });
+    }
+
+
+    public MyLayoutView getLayout()
+    {
+        return layout;
     }
 
     public void setViewSize(int w,int h)
