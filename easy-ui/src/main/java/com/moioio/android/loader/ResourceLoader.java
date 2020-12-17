@@ -218,7 +218,7 @@ public class ResourceLoader {
     }
 
 
-    static int BUFFER_SIZE = 8*1024;
+    static int BUFFER_SIZE = 10*1024;
 
     public static String saveHttpCache(String url,String md5,boolean isUseMd5, String cachePath, boolean isUseCach, HttpListener listener) {
 
