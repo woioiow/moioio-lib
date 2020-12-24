@@ -19,6 +19,15 @@ public class DisplayUtil
         return result;
     }
 
+    public static int getTopBarHeight(Context context){
+        return getStateBarHeight(context);
+    }
+
+    public static int getBottomBarHeight(Context context){
+        return getNavigationBarHeight(context);
+    }
+
+
     public static int getNavigationBarHeight(Context context) {
         return  getNavigationBarHeight(context, Configuration.ORIENTATION_PORTRAIT);
     }
