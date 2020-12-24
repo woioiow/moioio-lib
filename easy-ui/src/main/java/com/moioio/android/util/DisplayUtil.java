@@ -9,6 +9,30 @@ import android.view.WindowManager;
 
 public class DisplayUtil
 {
+    public static int topH(Context context){
+        return getStateBarHeight(context);
+    }
+
+    public static int bottomH(Context context){
+        return getNavigationBarHeight(context);
+    }
+
+    public static int dip(Context context, int num)
+    {
+        return getDip(context,num);
+    }
+
+    public static int screenW(Context context)
+    {
+        return getScreenWidth(context);
+    }
+
+    public static int screenH(Context context)
+    {
+        return getScreenHeight(context);
+    }
+
+
 
     public static int getStateBarHeight(Context context){
         int result = 0;
@@ -19,13 +43,6 @@ public class DisplayUtil
         return result;
     }
 
-    public static int getTopBarHeight(Context context){
-        return getStateBarHeight(context);
-    }
-
-    public static int getBottomBarHeight(Context context){
-        return getNavigationBarHeight(context);
-    }
 
 
     public static int getNavigationBarHeight(Context context) {
@@ -42,6 +59,8 @@ public class DisplayUtil
         }
         return 0;
     }
+
+
 
     public static int getDip(Context context, int num)
     {
