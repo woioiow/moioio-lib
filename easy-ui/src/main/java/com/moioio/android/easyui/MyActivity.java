@@ -27,8 +27,24 @@ public class MyActivity extends Activity {
     }
 
 
+    public void setTopBottomBarTrans()
+    {
+        setTopBottomBarColor(Color.TRANSPARENT);
+    }
 
-    public void setNavigationBarColor(int color)
+    public void setTopBottomBarColor(int color){
+        if (Build.VERSION.SDK_INT >= 21) {
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            getWindow().setNavigationBarColor(color);
+            getWindow().setStatusBarColor(color);
+        }
+    }
+
+    public void setBottomBarColor(int color)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
@@ -36,31 +52,47 @@ public class MyActivity extends Activity {
         }
     }
 
-    public void setNavigationBarStatusBarTranslucent(){
+    public void setTopBarColor(int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(color);
+        }
+    }
+
+    public void setTopBarTrans() {
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                     | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
             decorView.setSystemUiVisibility(option);
-            getWindow().setNavigationBarColor(Color.TRANSPARENT);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
     }
 
 
 
-    public void setWindowStatusBarTrans() {
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                View decorView = getWindow().getDecorView();
-                decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-                getWindow().setStatusBarColor(Color.TRANSPARENT);
-            }
-        } catch (Exception e) {
-            MyLog.printStackTrace(e);
-        }
-    }
+
+
+//    public void setNavigationBarStatusBarTranslucent(){
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            View decorView = getWindow().getDecorView();
+//            int option = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+//                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+//            decorView.setSystemUiVisibility(option);
+//            getWindow().setNavigationBarColor(Color.TRANSPARENT);
+//            getWindow().setStatusBarColor(Color.TRANSPARENT);
+//        }
+//    }
+
+
+
+
+    //
+
+
+
+
 
 
     public static void openActivity(Context context, Class clz) {
@@ -100,6 +132,20 @@ public class MyActivity extends Activity {
         String name = this.getPackageName()+"."+this.getLocalClassName();
 //        MobclickAgent.onPageEnd(name);
     }
+
+
+    public void setWindowStatusBarTrans() {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                View decorView = getWindow().getDecorView();
+                decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+                getWindow().setStatusBarColor(Color.TRANSPARENT);
+            }
+        } catch (Exception e) {
+            MyLog.printStackTrace(e);
+        }
+    }
+
 
     public void setWindowStatusBarColor(Activity activity, int color) {
         try {
