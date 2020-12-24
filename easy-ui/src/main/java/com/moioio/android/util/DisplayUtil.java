@@ -2,6 +2,8 @@ package com.moioio.android.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -17,7 +19,20 @@ public class DisplayUtil
         return result;
     }
 
+    public static int getNavigationBarHeight(Context context) {
+        return  getNavigationBarHeight(context, Configuration.ORIENTATION_PORTRAIT);
+    }
 
+
+    public static int getNavigationBarHeight(Context context, int orientation) {
+        Resources resources = context.getResources();
+
+        int id = resources.getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
+        if (id > 0) {
+            return resources.getDimensionPixelSize(id);
+        }
+        return 0;
+    }
 
     public static int getDip(Context context, int num)
     {
