@@ -10,11 +10,21 @@ import com.moioio.android.easyui.UIConf;
 import com.moioio.android.util.ViewUtil;
 
 public class MyListView extends ListView {
+    MyBaseAdapter adapter;
 
     public MyListView(Context context) {
         super(context);
         ViewUtil.setViewID(this);
+        adapter = new MyBaseAdapter(context);
+        this.setAdapter(adapter);
     }
+
+    @Override
+    public MyBaseAdapter getAdapter() {
+        return adapter;
+    }
+
+
 
     private MyLayout MyLayout;
     public MyLayout makeLayout(int width, int height)

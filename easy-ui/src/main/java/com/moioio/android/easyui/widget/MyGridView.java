@@ -11,9 +11,20 @@ import com.moioio.android.util.ViewUtil;
 
 public class MyGridView extends GridView {
 
+
+    MyBaseAdapter adapter;
+
     public MyGridView(Context context) {
         super(context);
         ViewUtil.setViewID(this);
+        adapter = new MyBaseAdapter(context);
+        this.setAdapter(adapter);
+    }
+
+
+    @Override
+    public MyBaseAdapter getAdapter() {
+        return adapter;
     }
 
     private MyLayout MyLayout;

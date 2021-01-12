@@ -51,6 +51,9 @@ public class TimerHandler extends Handler
 	{
 		isRuning = true;
 		sleep();
-	}	
+	}
 
+	public void setRunnable(Runnable run) {
+		runnable = run;
+	}
 }
