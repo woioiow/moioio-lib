@@ -6,15 +6,43 @@ import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
 
+import com.moioio.android.easyui.UI;
 import com.moioio.android.easyui.UIConf;
 import com.moioio.android.util.ViewUtil;
 
 public class MyHorizontalScrollView extends HorizontalScrollView {
 
+    MyLinearLayout layout;
     public MyHorizontalScrollView(Context context) {
         super(context);
         ViewUtil.setViewID(this);
+        layout = new MyLinearLayout(context);
+        layout.setOrientation(UI.HORIZONTAL);
+        this.addView(layout);
     }
+
+    public void addView(View child) {
+        this.removeAllViews();
+        super.addView(child);
+    }
+
+    public void addItem(View child) {
+        layout.addView(child);
+    }
+
+    public int getItemCount() {
+        return layout.getChildCount();
+    }
+
+    public View getItemAt(int index) {
+        return layout.getChildAt(index);
+    }
+
+    public void removeItem(View view) {
+        layout.removeView(view);
+    }
+
+
 
 
     private MyLayout MyLayout;

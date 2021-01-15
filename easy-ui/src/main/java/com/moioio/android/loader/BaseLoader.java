@@ -80,4 +80,10 @@ public abstract class BaseLoader {
     public void setLoaded(boolean loaded) {
         isLoaded = loaded;
     }
+
+
+    public void loadOK() {
+        setLoaded(true);
+    }
+
 }
