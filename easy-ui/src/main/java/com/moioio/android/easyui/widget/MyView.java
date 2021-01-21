@@ -2,11 +2,17 @@ package com.moioio.android.easyui.widget;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Path;
+import android.graphics.RectF;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.moioio.android.easyui.UIConf;
 import com.moioio.android.easyui.widget.MyLayout;
+import com.moioio.android.g2d.Graphics;
 import com.moioio.android.util.DisplayUtil;
 import com.moioio.android.util.ViewUtil;
 
@@ -117,4 +123,68 @@ public abstract class MyView extends RelativeLayout {
     public int defaultLine() {
         return line;
     }
+
+
+
+
+    float shadowBorder = 5;
+    float clipAngle = 0;
+    Path path ;
+    BlurMaskFilter blurMaskFilter;
+    Graphics g;
+    int shadowColor;
+    RectF rectFPath;
+
+
+    boolean isClipRound;
+    public void setRoundAngle(float angle)
+    {
+        clipAngle = angle;
+        if(clipAngle>0)
+        {
+            isClipRound = true;
+        }
+    }
+
+    public void setShadowColor(int color)
+    {
+        shadowColor = color;
+        isClipRound = true;
+    }
+
+    public void setShadowBorder(int border)
+    {
+        shadowBorder = border;
+        isClipRound = true;
+        rectFPath = new RectF(shadowBorder, shadowBorder, getMeasuredWidth()-shadowBorder, getMeasuredHeight()-shadowBorder);
+        blurMaskFilter = new BlurMaskFilter(shadowBorder, BlurMaskFilter.Blur.OUTER);
+    }
+
+
+    @Override
+    protected void dispatchDraw(Canvas canvas) {
+
+        if(isClipRound)
+        {
+            if(g==null)
+            {
+                path = new Path();
+                g = new Graphics();
+                rectFPath = new RectF(shadowBorder, shadowBorder, getMeasuredWidth()-shadowBorder, getMeasuredHeight()-shadowBorder);
+                blurMaskFilter = new BlurMaskFilter(shadowBorder, BlurMaskFilter.Blur.OUTER);
+            }
+            g.setCanvas(canvas);
+            path.reset();
+            path.addRoundRect(rectFPath, clipAngle,clipAngle, Path.Direction.CW);
+            g.setColor(shadowColor);
+            g.setMaskFilter(blurMaskFilter);
+            g.fillPath(path);
+            g.setMaskFilter(null);
+            canvas.clipPath(path);
+        }
+
+        super.dispatchDraw(canvas);
+    }
+
+
 }

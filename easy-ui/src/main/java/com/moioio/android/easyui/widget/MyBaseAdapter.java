@@ -100,6 +100,8 @@ public class MyBaseAdapter extends BaseAdapter {
 
 
     public void refresh() {
+
+
         ((Activity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {

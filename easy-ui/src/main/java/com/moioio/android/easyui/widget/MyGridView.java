@@ -22,10 +22,27 @@ public class MyGridView extends GridView {
     }
 
 
+    public void setItemViewClass(Class clz)
+    {
+        adapter.setItemViewClass(clz);
+    }
+
     @Override
     public MyBaseAdapter getAdapter() {
         return adapter;
     }
+
+    public void addData(Object data)
+    {
+        adapter.addData(data);
+    }
+
+    public void refresh()
+    {
+        adapter.refresh();
+    }
+
+
 
     private MyLayout MyLayout;
     public MyLayout makeLayout(int width, int height)
@@ -34,6 +51,9 @@ public class MyGridView extends GridView {
         this.setLayoutParams(MyLayout.get());
         return MyLayout;
     }
+
+
+
 
     public MyLayout getMyLayout()
     {

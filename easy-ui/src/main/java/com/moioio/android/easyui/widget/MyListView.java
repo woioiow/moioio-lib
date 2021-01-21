@@ -19,10 +19,26 @@ public class MyListView extends ListView {
         this.setAdapter(adapter);
     }
 
+    public void setItemViewClass(Class clz)
+    {
+        adapter.setItemViewClass(clz);
+    }
+
     @Override
     public MyBaseAdapter getAdapter() {
         return adapter;
     }
+
+    public void addData(Object data)
+    {
+        adapter.addData(data);
+    }
+
+    public void refresh()
+    {
+        adapter.refresh();
+    }
+
 
 
 
