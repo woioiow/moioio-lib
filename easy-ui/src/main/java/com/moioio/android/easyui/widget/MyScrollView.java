@@ -31,6 +31,11 @@ public class MyScrollView extends ScrollView {
         layout.addView(child);
     }
 
+    public void addItem(View child,int index) {
+        layout.addView(child,index);
+    }
+
+
     public int getItemCount() {
         return layout.getChildCount();
     }
