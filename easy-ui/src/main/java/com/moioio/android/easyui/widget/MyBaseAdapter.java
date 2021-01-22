@@ -80,6 +80,7 @@ public class MyBaseAdapter extends BaseAdapter {
         if(viewHolder.view!=null)
         {
             viewHolder.view.setData(dataList.get(position));
+            viewHolder.view.setPosition(position);
         }
 
         if(listener!=null)

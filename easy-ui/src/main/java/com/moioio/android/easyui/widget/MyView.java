@@ -127,7 +127,7 @@ public abstract class MyView extends RelativeLayout {
 
 
 
-    float shadowBorder = 5;
+    float shadowBorder = 0;
     float clipAngle = 0;
     Path path ;
     BlurMaskFilter blurMaskFilter;
@@ -146,6 +146,13 @@ public abstract class MyView extends RelativeLayout {
         }
     }
 
+    public void setShadow(int color,int border)
+    {
+        setShadowColor(color);
+        setShadowBorder(border);
+    }
+
+
     public void setShadowColor(int color)
     {
         shadowColor = color;
@@ -157,7 +164,14 @@ public abstract class MyView extends RelativeLayout {
         shadowBorder = border;
         isClipRound = true;
         rectFPath = new RectF(shadowBorder, shadowBorder, getMeasuredWidth()-shadowBorder, getMeasuredHeight()-shadowBorder);
-        blurMaskFilter = new BlurMaskFilter(shadowBorder, BlurMaskFilter.Blur.OUTER);
+        if(shadowBorder!=0)
+        {
+            blurMaskFilter = new BlurMaskFilter(shadowBorder, BlurMaskFilter.Blur.OUTER);
+        }
+        else
+        {
+            blurMaskFilter = null;
+        }
     }
 
 
@@ -171,15 +185,17 @@ public abstract class MyView extends RelativeLayout {
                 path = new Path();
                 g = new Graphics();
                 rectFPath = new RectF(shadowBorder, shadowBorder, getMeasuredWidth()-shadowBorder, getMeasuredHeight()-shadowBorder);
-                blurMaskFilter = new BlurMaskFilter(shadowBorder, BlurMaskFilter.Blur.OUTER);
             }
             g.setCanvas(canvas);
             path.reset();
             path.addRoundRect(rectFPath, clipAngle,clipAngle, Path.Direction.CW);
-            g.setColor(shadowColor);
-            g.setMaskFilter(blurMaskFilter);
-            g.fillPath(path);
-            g.setMaskFilter(null);
+            if(blurMaskFilter!=null)
+            {
+                g.setColor(shadowColor);
+                g.setMaskFilter(blurMaskFilter);
+                g.fillPath(path);
+                g.setMaskFilter(null);
+            }
             canvas.clipPath(path);
         }
 

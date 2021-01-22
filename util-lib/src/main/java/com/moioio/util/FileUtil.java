@@ -169,6 +169,12 @@ public class FileUtil
     }
 
 
+    public static boolean isExists(String path) {
+
+        return new File(path).exists();
+    }
+
+
     public static boolean delFolder(String path)
     {
         return delFolder(new File(path));

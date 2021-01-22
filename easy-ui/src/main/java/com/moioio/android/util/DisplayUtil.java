@@ -7,8 +7,35 @@ import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import com.moioio.android.MyAndroidLib;
+
 public class DisplayUtil
 {
+    public static int topH( ){
+        return getStateBarHeight(MyAndroidLib.context);
+    }
+
+    public static int bottomH( ){
+        return getNavigationBarHeight(MyAndroidLib.context);
+    }
+
+    public static int dip( int num)
+    {
+        return getDip(MyAndroidLib.context,num);
+    }
+
+    public static int screenW( )
+    {
+        return getScreenWidth(MyAndroidLib.context);
+    }
+
+    public static int screenH( )
+    {
+        return getScreenHeight(MyAndroidLib.context);
+    }
+
+
+
     public static int topH(Context context){
         return getStateBarHeight(context);
     }
