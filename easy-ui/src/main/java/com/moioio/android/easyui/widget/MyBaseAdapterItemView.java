@@ -1,6 +1,7 @@
 package com.moioio.android.easyui.widget;
 
 import android.content.Context;
+import android.view.View;
 
 public abstract class MyBaseAdapterItemView extends MyView {
 
@@ -13,8 +14,6 @@ public abstract class MyBaseAdapterItemView extends MyView {
 
 
     public abstract void setData(Object obj);
-
-
 
     public int getPosition() {
         return position;
@@ -39,5 +38,9 @@ public abstract class MyBaseAdapterItemView extends MyView {
 
     public void setAdapter(MyBaseAdapter adapter) {
         this.adapter = adapter;
+    }
+
+    public void setParentView(View view) {
+
     }
 }

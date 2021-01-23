@@ -28,6 +28,14 @@ public class MyBaseAdapter extends BaseAdapter {
         dataList = new ArrayList();
     }
 
+
+    View parentView;
+    public void setParentView(View view)
+    {
+        parentView = view;
+    }
+
+
     public void setItemViewClass(Class clz)
     {
         this.viewCLZ = clz;
@@ -79,6 +87,7 @@ public class MyBaseAdapter extends BaseAdapter {
         }
         if(viewHolder.view!=null)
         {
+            viewHolder.view.setParentView(parentView);
             viewHolder.view.setData(dataList.get(position));
             viewHolder.view.setPosition(position);
         }
