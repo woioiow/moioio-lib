@@ -178,26 +178,26 @@ public abstract class MyView extends RelativeLayout {
     @Override
     protected void dispatchDraw(Canvas canvas) {
 
-        if(isClipRound)
-        {
-            if(g==null)
-            {
-                path = new Path();
-                g = new Graphics();
-                rectFPath = new RectF(shadowBorder, shadowBorder, getMeasuredWidth()-shadowBorder, getMeasuredHeight()-shadowBorder);
-            }
-            g.setCanvas(canvas);
-            path.reset();
-            path.addRoundRect(rectFPath, clipAngle,clipAngle, Path.Direction.CW);
-            if(blurMaskFilter!=null)
-            {
-                g.setColor(shadowColor);
-                g.setMaskFilter(blurMaskFilter);
-                g.fillPath(path);
-                g.setMaskFilter(null);
-            }
-            canvas.clipPath(path);
-        }
+//        if(isClipRound)
+//        {
+//            if(g==null)
+//            {
+//                path = new Path();
+//                g = new Graphics();
+//                rectFPath = new RectF(shadowBorder, shadowBorder, getMeasuredWidth()-shadowBorder, getMeasuredHeight()-shadowBorder);
+//            }
+//            g.setCanvas(canvas);
+//            path.reset();
+//            path.addRoundRect(rectFPath, clipAngle,clipAngle, Path.Direction.CW);
+//            if(blurMaskFilter!=null)
+//            {
+//                g.setColor(shadowColor);
+//                g.setMaskFilter(blurMaskFilter);
+//                g.fillPath(path);
+//                g.setMaskFilter(null);
+//            }
+//            canvas.clipPath(path);
+//        }
 
         super.dispatchDraw(canvas);
     }
