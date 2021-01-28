@@ -29,7 +29,7 @@ public class FileUtil
             }
             FileInputStream input = new FileInputStream(oldPath);
             FileOutputStream output = new FileOutputStream(newPath);
-            byte[] b = new byte[1024 * 5];
+            byte[] b = new byte[UtilConf.BUFFER_SIZE];
             int len;
             while ((len = input.read(b)) != -1) {
                 output.write(b, 0, len);
@@ -46,7 +46,7 @@ public class FileUtil
         try {
             FileInputStream file = new FileInputStream(name);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            byte[] b = new byte[1024 * 20];
+            byte[] b = new byte[UtilConf.BUFFER_SIZE];
             int len;
             while ((len = file.read(b)) != -1) {
                 bos.write(b, 0, len);
@@ -124,7 +124,7 @@ public class FileUtil
                 }
                 FileOutputStream output = new FileOutputStream(newPath + "/"
                         + (a.getName()).toString());
-                byte[] b = new byte[1024 * 5];
+                byte[] b = new byte[UtilConf.BUFFER_SIZE];
                 int len;
                 while ((len = input.read(b)) != -1) {
                     output.write(b, 0, len);
@@ -149,7 +149,7 @@ public class FileUtil
                         FileInputStream input = new FileInputStream(temp);
                         FileOutputStream output = new FileOutputStream(newPath + "/"
                                 + (temp.getName()).toString());
-                        byte[] b = new byte[1024 * 5];
+                        byte[] b = new byte[UtilConf.BUFFER_SIZE];
                         int len;
                         while ((len = input.read(b)) != -1) {
                             output.write(b, 0, len);

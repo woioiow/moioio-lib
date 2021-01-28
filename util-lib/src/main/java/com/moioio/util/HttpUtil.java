@@ -7,8 +7,6 @@ import java.io.FileOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static com.moioio.util.StreamUtil.BUFFER_SIZE;
-
 public class HttpUtil {
 
 
@@ -18,7 +16,7 @@ public class HttpUtil {
         BufferedInputStream bis = null;
         HttpURLConnection httpUrl = null;
         URL url = null;
-        byte[] buf = new byte[BUFFER_SIZE];
+        byte[] buf = new byte[UtilConf.BUFFER_SIZE];
         int size = 0;
 
         try {
@@ -66,7 +64,7 @@ public class HttpUtil {
         BufferedInputStream bis = null;
         HttpURLConnection httpUrl = null;
         URL url = null;
-        byte[] buf = new byte[BUFFER_SIZE];
+        byte[] buf = new byte[UtilConf.BUFFER_SIZE];
         int size = 0;
 
         try {
@@ -130,7 +128,7 @@ public class HttpUtil {
         BufferedInputStream bis = null;
         HttpURLConnection httpUrl = null;
         URL url = null;
-        byte[] buf = new byte[BUFFER_SIZE];
+        byte[] buf = new byte[UtilConf.BUFFER_SIZE];
         int size = 0;
         byte[] data = null;
 
@@ -183,7 +181,7 @@ public class HttpUtil {
 
         BufferedInputStream bis = null;
         HttpURLConnection httpUrl = null;
-        byte[] buf = new byte[BUFFER_SIZE];
+        byte[] buf = new byte[UtilConf.BUFFER_SIZE];
         String path = null;
         int size = 0;
         String name = CodeUtil.md5(url);

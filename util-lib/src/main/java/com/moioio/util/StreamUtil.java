@@ -5,7 +5,6 @@ import java.io.InputStream;
 
 public class StreamUtil {
 
-    static int BUFFER_SIZE = 8*1024;
 
 
     public static byte[] inputStreamToBytes(InputStream bis)
@@ -16,7 +15,7 @@ public class StreamUtil {
             ByteArrayOutputStream fos = new ByteArrayOutputStream();
 
             int size = 0;
-            byte[] buf = new byte[BUFFER_SIZE];
+            byte[] buf = new byte[UtilConf.BUFFER_SIZE];
 
 
             while ((size = bis.read(buf)) != -1) {

@@ -8,6 +8,7 @@ import com.moioio.util.FileUtil;
 import com.moioio.util.HttpListener;
 import com.moioio.util.MyLog;
 import com.moioio.util.StringUtil;
+import com.moioio.util.UtilConf;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -218,13 +219,13 @@ public class ResourceLoader {
     }
 
 
-    static int BUFFER_SIZE = 10*1024;
+//    static int BUFFER_SIZE = 10*1024;
 
     public static String saveHttpCache(String url,String md5,boolean isUseMd5, String cachePath, boolean isUseCach, HttpListener listener) {
 
         BufferedInputStream bis = null;
         HttpURLConnection httpUrl = null;
-        byte[] buf = new byte[BUFFER_SIZE];
+        byte[] buf = new byte[UtilConf.BUFFER_SIZE];
         String path = null;
         int size = 0;
         String name = CodeUtil.md5(url);
