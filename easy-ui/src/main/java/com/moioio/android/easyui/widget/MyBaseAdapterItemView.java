@@ -6,7 +6,7 @@ import android.view.View;
 public abstract class MyBaseAdapterItemView extends MyView {
 
     private int position;
-    private MyBaseAdapter adapter;
+    private Object adapter;
 
     public MyBaseAdapterItemView(Context context) {
         super(context);
@@ -32,11 +32,11 @@ public abstract class MyBaseAdapterItemView extends MyView {
         return bind;
     }
 
-    public MyBaseAdapter getAdapter() {
+    public Object getAdapter() {
         return adapter;
     }
 
-    public void setAdapter(MyBaseAdapter adapter) {
+    public void setAdapter(Object adapter) {
         this.adapter = adapter;
     }
 
