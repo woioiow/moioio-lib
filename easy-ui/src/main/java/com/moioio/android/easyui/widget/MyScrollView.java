@@ -48,6 +48,9 @@ public class MyScrollView extends ScrollView {
         layout.removeView(view);
     }
 
+    public void removeAllItem( ) {
+        layout.removeAllViews();
+    }
 
     private MyLayout MyLayout;
     public MyLayout makeLayout(int width, int height)

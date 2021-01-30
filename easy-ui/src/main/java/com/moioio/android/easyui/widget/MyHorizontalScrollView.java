@@ -42,6 +42,9 @@ public class MyHorizontalScrollView extends HorizontalScrollView {
         layout.removeView(view);
     }
 
+    public void removeAllItem( ) {
+        layout.removeAllViews();
+    }
 
 
 
