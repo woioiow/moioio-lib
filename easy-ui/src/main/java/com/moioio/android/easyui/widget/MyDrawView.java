@@ -79,6 +79,7 @@ public abstract class MyDrawView extends View
     }
 
 
+    boolean isInit;
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
@@ -89,22 +90,25 @@ public abstract class MyDrawView extends View
         int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
         w = widthSpecSize;
         h = heightSpecSize;
-
+        if(!isInit)
+        {
+            init();
+            isInit = true;
+        }
     }
 
 
     protected void onDraw(Canvas canvas)
     {
         super.onDraw(canvas);
-        if(w==0||h==0)
-        {
-            w = getWidth();
-            h = getHeight();
-        }
+//        if(w==0||h==0)
+//        {
+//            w = getWidth();
+//            h = getHeight();
+//        }
         g.setWidth(w);
         g.setHeight(h);
         g.setCanvas(canvas);
-        init();
         paint(g);
     }
 
