@@ -12,6 +12,7 @@ import android.view.View;
 import com.moioio.android.easyui.UIConf;
 import com.moioio.android.g2d.Graphics;
 import com.moioio.android.util.ViewUtil;
+import com.moioio.util.MyLog;
 
 public abstract class MyDrawView extends View
 {
@@ -78,11 +79,28 @@ public abstract class MyDrawView extends View
     }
 
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    {
+        super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+        w = widthSpecSize;
+        h = heightSpecSize;
+
+    }
+
+
     protected void onDraw(Canvas canvas)
     {
         super.onDraw(canvas);
-        w = getWidth();
-        h = getHeight();
+        if(w==0||h==0)
+        {
+            w = getWidth();
+            h = getHeight();
+        }
         g.setWidth(w);
         g.setHeight(h);
         g.setCanvas(canvas);
