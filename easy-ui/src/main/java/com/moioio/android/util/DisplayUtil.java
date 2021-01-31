@@ -24,16 +24,25 @@ public class DisplayUtil
         return getDip(MyAndroidLib.context,num);
     }
 
-    public static int screenW( )
+    public static int screenW()
     {
         return getScreenWidth(MyAndroidLib.context);
     }
 
-    public static int screenH( )
+    public static int screenH()
     {
         return getScreenHeight(MyAndroidLib.context);
     }
 
+    public static int screenW(float rate)
+    {
+        return (int) (getScreenWidth(MyAndroidLib.context)*rate);
+    }
+
+    public static int screenH(float rate)
+    {
+        return (int) (getScreenHeight(MyAndroidLib.context)*rate);
+    }
 
 
     public static int topH(Context context){
