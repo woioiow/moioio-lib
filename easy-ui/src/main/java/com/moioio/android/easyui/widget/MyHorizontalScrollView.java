@@ -83,6 +83,22 @@ public class MyHorizontalScrollView extends HorizontalScrollView {
         this.setVisibility(GONE);
     }
 
+    public boolean isShow()
+    {
+        return this.getVisibility()==VISIBLE;
+    }
+
+    public boolean isHide()
+    {
+        return this.getVisibility()==INVISIBLE;
+    }
+
+    public boolean isGone()
+    {
+        return this.getVisibility()==GONE;
+    }
+
+
     public Activity getActivity()
     {
         return (Activity)getContext();
