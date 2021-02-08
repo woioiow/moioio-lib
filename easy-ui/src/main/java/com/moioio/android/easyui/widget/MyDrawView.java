@@ -25,7 +25,7 @@ public abstract class MyDrawView extends View
     public static final int TOUCH_UP = 3;
     private SparseArray<PointF> multiTouchPoints;
     private MyLayout MyLayout;
-    boolean isUseTouch;
+    boolean isUseTouch = true;
 
     public MyLayout makeLayout(int width, int height)
     {
