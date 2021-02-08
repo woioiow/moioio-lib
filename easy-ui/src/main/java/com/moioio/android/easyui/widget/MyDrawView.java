@@ -16,9 +16,6 @@ import com.moioio.util.MyLog;
 
 public abstract class MyDrawView extends View
 {
-
-
-
     private Graphics g;
     private float w;
     private float h;
@@ -28,6 +25,7 @@ public abstract class MyDrawView extends View
     public static final int TOUCH_UP = 3;
     private SparseArray<PointF> multiTouchPoints;
     private MyLayout MyLayout;
+    boolean isUseTouch;
 
     public MyLayout makeLayout(int width, int height)
     {
@@ -68,7 +66,9 @@ public abstract class MyDrawView extends View
         return (Activity)getContext();
     }
 
-
+    public void setUseTouch(boolean useTouch) {
+        isUseTouch = useTouch;
+    }
 
     public MyDrawView(Context context)
     {
@@ -101,11 +101,6 @@ public abstract class MyDrawView extends View
     protected void onDraw(Canvas canvas)
     {
         super.onDraw(canvas);
-//        if(w==0||h==0)
-//        {
-//            w = getWidth();
-//            h = getHeight();
-//        }
         g.setWidth(w);
         g.setHeight(h);
         g.setCanvas(canvas);
@@ -140,6 +135,12 @@ public abstract class MyDrawView extends View
 
     public boolean onTouchEvent(MotionEvent event)
     {
+        if(!isUseTouch)
+        {
+            return super.onTouchEvent(event);
+        }
+
+
         int size = event.getPointerCount();
 
         if(size==1)

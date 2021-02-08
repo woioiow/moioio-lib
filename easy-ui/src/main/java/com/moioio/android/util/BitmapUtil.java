@@ -102,6 +102,11 @@ public class BitmapUtil {
         return bmp;
     }
 
+    public static Bitmap getScaleBitmap(Bitmap bitmap,int w,int h) {
+
+        Bitmap bmp = Bitmap.createScaledBitmap(bitmap,w,h,true);
+        return bmp;
+    }
 
 
 
