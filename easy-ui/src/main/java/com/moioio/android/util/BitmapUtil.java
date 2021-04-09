@@ -13,6 +13,8 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.os.Build;
+import android.view.View;
 
 public class BitmapUtil {
 
@@ -109,6 +111,28 @@ public class BitmapUtil {
     }
 
 
+    public static Bitmap getBitmapByCanvas(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        if (Build.VERSION.SDK_INT >= 11) {
+            view.measure(
+                    View.MeasureSpec.makeMeasureSpec(
+                            view.getWidth(), View.MeasureSpec.EXACTLY),
+                    View.MeasureSpec.makeMeasureSpec(
+                            view.getHeight(), View.MeasureSpec.EXACTLY)
+            );
+        } else {
+            view.measure(
+                    View.MeasureSpec.makeMeasureSpec(
+                            0, View.MeasureSpec.UNSPECIFIED),
+                    View.MeasureSpec.makeMeasureSpec(
+                            0, View.MeasureSpec.UNSPECIFIED)
+            );
+            view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+        }
+        view.draw(canvas);
+        return bitmap;
+    }
 
 
 }

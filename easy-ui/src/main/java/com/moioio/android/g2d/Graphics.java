@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.DashPathEffect;
@@ -41,7 +42,7 @@ public class Graphics
     float height;
 
     Canvas grap ;
-    public Paint paint = new Paint();
+    public Paint paint;
 //    public TextPaint textPaint = new TextPaint();
 
 
@@ -325,20 +326,19 @@ public class Graphics
     }
 
 
+    Rect stringRect = new Rect();
     public int getStringWidth(String str)
     {
-        Rect rect = new Rect();
-        paint.getTextBounds(str, 0, str.length(), rect);
+        paint.getTextBounds(str, 0, str.length(), stringRect);
 //        paint.getTextBounds(str, 0, str.length(), rect);
-        return rect.width();
+        return stringRect.width();
     }
 
     public int getStringHeight(String str)
     {
-        Rect rect = new Rect();
-        paint.getTextBounds(str, 0, str.length(), rect);
+        paint.getTextBounds(str, 0, str.length(), stringRect);
 //        paint.getTextBounds(str, 0, str.length(), rect);
-        return rect.height();
+        return stringRect.height();
     }
 
 
@@ -359,9 +359,14 @@ public class Graphics
     public void setColorMatrix(ColorMatrix colorMatrix) {
 
         paint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
-//        paint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
-
     }
+
+    public void setColorFilter(ColorFilter filter) {
+
+        paint.setColorFilter(filter);
+    }
+
+
 
     public void setFontSpace(float space) {
 

@@ -11,6 +11,12 @@ import com.moioio.android.MyAndroidLib;
 
 public class DisplayUtil
 {
+
+    static DisplayMetrics localDisplayMetrics;
+    static WindowManager windowManager;
+    static Resources resources;
+
+
     public static int topH( ){
         return getStateBarHeight(MyAndroidLib.context);
     }
@@ -71,10 +77,11 @@ public class DisplayUtil
 
 
     public static int getStateBarHeight(Context context){
+        initDip(context);
         int result = 0;
-        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
-            result = context.getResources().getDimensionPixelSize(resourceId);
+            result = resources.getDimensionPixelSize(resourceId);
         }
         return result;
     }
@@ -87,8 +94,7 @@ public class DisplayUtil
 
 
     public static int getNavigationBarHeight(Context context, int orientation) {
-        Resources resources = context.getResources();
-
+        initDip(context);
         int id = resources.getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
         if (id > 0) {
             return resources.getDimensionPixelSize(id);
@@ -104,28 +110,42 @@ public class DisplayUtil
         return (int) value;
     }
 
+
+    private static void initDip(Context context)
+    {
+        if(localDisplayMetrics==null)
+        {
+            localDisplayMetrics = new DisplayMetrics();
+            windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+            windowManager.getDefaultDisplay().getMetrics(localDisplayMetrics);
+            resources = context.getResources();
+        }
+    }
+
+
+    public static void reset()
+    {
+        localDisplayMetrics = null;
+        windowManager = null;
+        resources = null;
+    }
+
     public static float getScreenDpi(Context context)
     {
-        DisplayMetrics localDisplayMetrics = new DisplayMetrics();
-        WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getMetrics(localDisplayMetrics);
+        initDip(context);
         return localDisplayMetrics.density;
     }
 
 
     public static int getScreenHeight(Context context)
     {
-        DisplayMetrics localDisplayMetrics = new DisplayMetrics();
-        WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getMetrics(localDisplayMetrics);
+        initDip(context);
         return localDisplayMetrics.heightPixels;
     }
 
     public static int getScreenWidth(Context context)
     {
-        DisplayMetrics localDisplayMetrics = new DisplayMetrics();
-        WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getMetrics(localDisplayMetrics);
+        initDip(context);
         return localDisplayMetrics.widthPixels;
     }
 
