@@ -41,7 +41,7 @@ public class Graphics
     float width;
     float height;
 
-    Canvas grap ;
+    public Canvas grap ;
     public Paint paint;
 //    public TextPaint textPaint = new TextPaint();
 

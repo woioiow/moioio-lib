@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
@@ -14,7 +15,10 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.os.Build;
+import android.view.Gravity;
 import android.view.View;
+
+import com.moioio.android.g2d.Graphics;
 
 public class BitmapUtil {
 
@@ -108,6 +112,34 @@ public class BitmapUtil {
 
         Bitmap bmp = Bitmap.createScaledBitmap(bitmap,w,h,true);
         return bmp;
+    }
+
+    public static Bitmap changeBitmapColor(Bitmap bitmap,int color) {
+
+        int r = Color.red(color);
+        int g = Color.green(color);
+        int b = Color.blue(color);
+        int a = Color.alpha(color);
+
+        float[] colorTransform = {
+                1, 0f, 0, 0, r,
+                0, 1, 0f, 0, g,
+                0, 0, 1, 0f, b,
+                0, 0, 0, 1f, a};
+
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.set(colorTransform); //Apply the Red
+
+        ColorMatrixColorFilter colorFilter = new ColorMatrixColorFilter(colorMatrix);
+
+        Bitmap newBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(newBitmap);
+        Graphics grap = new Graphics(canvas);
+        grap.setColorFilter(colorFilter);
+        grap.drawImage(bitmap,0,0);
+
+
+        return newBitmap;
     }
 
 

@@ -174,6 +174,59 @@ public class FileUtil
         return new File(path).exists();
     }
 
+    public static boolean mkdir(String path) {
+
+        return new File(path).mkdirs();
+    }
+
+    public static String getSuffix(String path) {
+
+        int lastIndexOf = path.lastIndexOf(".");
+        if(lastIndexOf!=-1)
+        {
+            String suffix = path.substring(lastIndexOf);
+            return suffix;
+        }
+        return path;
+    }
+
+    public static String getSuffixFromUrl(String url)
+    {
+        if (!StringUtil.isNull(url))
+        {
+            int fragment = url.lastIndexOf('#');
+            if (fragment > 0)
+            {
+                url = url.substring(0, fragment);
+            }
+
+            int query = url.lastIndexOf('?');
+            if (query > 0)
+            {
+                url = url.substring(0, query);
+            }
+
+            int filenamePos = url.lastIndexOf('/');
+            String filename = 0 <= filenamePos ? url.substring(filenamePos + 1) : url;
+
+//            Log.d("filename",filename);
+
+            // if the filename contains special characters, we don't
+            // consider it valid for our matching purposes:
+            if (!filename.isEmpty())
+            {
+                int dotPos = filename.lastIndexOf('.');
+                if (0 <= dotPos)
+                {
+                    return filename.substring(dotPos + 1);
+                }
+            }
+        }
+
+        return "";
+    }
+
+
 
     public static boolean delFolder(String path)
     {

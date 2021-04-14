@@ -5,6 +5,8 @@ import android.content.Context;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.view.View;
@@ -202,6 +204,13 @@ public abstract class MyView extends RelativeLayout {
             {
                 path = new Path();
                 g = new Graphics();
+                g.paint.setAntiAlias(true);
+//                g.grap.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALILAS_FLAG | Paint.FLITER_BITMAP_FLAG))
+
+                PaintFlagsDrawFilter pfd = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG);
+                canvas.setDrawFilter(pfd);
+                g.getCanvas().setDrawFilter(pfd);
+
                 rectFPath = new RectF(shadowBorder, shadowBorder, getMeasuredWidth()-shadowBorder, getMeasuredHeight()-shadowBorder);
             }
             g.setCanvas(canvas);

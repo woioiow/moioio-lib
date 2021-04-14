@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
-public class StringUtil
+public class
+StringUtil
 {
     static String STRING_NULL = "";
 
