@@ -193,7 +193,7 @@ public abstract class MyView extends RelativeLayout {
             blurMaskFilter = null;
         }
     }
-
+    PaintFlagsDrawFilter pfd;
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
@@ -207,13 +207,13 @@ public abstract class MyView extends RelativeLayout {
                 g.paint.setAntiAlias(true);
 //                g.grap.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALILAS_FLAG | Paint.FLITER_BITMAP_FLAG))
 
-                PaintFlagsDrawFilter pfd = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG);
+                pfd = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG);
                 canvas.setDrawFilter(pfd);
-                g.getCanvas().setDrawFilter(pfd);
 
                 rectFPath = new RectF(shadowBorder, shadowBorder, getMeasuredWidth()-shadowBorder, getMeasuredHeight()-shadowBorder);
             }
             g.setCanvas(canvas);
+            g.getCanvas().setDrawFilter(pfd);
             path.reset();
             path.addRoundRect(rectFPath, clipAngle,clipAngle, Path.Direction.CW);
             if(blurMaskFilter!=null)
