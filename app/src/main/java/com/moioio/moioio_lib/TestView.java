@@ -13,6 +13,7 @@ import com.moioio.android.easyui.widget.MyLayoutView;
 import com.moioio.android.easyui.widget.MyView;
 import com.moioio.android.util.BitmapUtil;
 import com.moioio.android.util.DisplayUtil;
+import com.moioio.android.util.ViewUtil;
 
 public class TestView extends MyView {
 
@@ -47,16 +48,28 @@ public class TestView extends MyView {
         view.makeLayout(DisplayUtil.dip(200),DisplayUtil.dip(200))
         .center();
 
+        MyLayoutView view2 = new MyLayoutView(context);
+        view2.makeLayout(DisplayUtil.dip(200),DisplayUtil.dip(200))
+                .center();
+        view2.setBackground(ViewUtil.makeRoundBord(0,1,Color.RED));
+
+
         MyImageView iconView = new MyImageView(context);
         iconView.setScaleType(ImageView.ScaleType.FIT_XY);
-        iconView.setImageBitmap(BitmapUtil.getAssetsBitmap(context,"assets://test.jpg"));
+        iconView.setImageBitmap(BitmapUtil.getAssetsBitmap(context,"assets://lib_test.jpg"));
         iconView.makeLayout(UI.WRAP_CONTENT,UI.WRAP_CONTENT);
-
         view.addView(iconView);
+
+//        MyLayoutView iconView = new MyLayoutView(context);
+//        iconView.setBackgroundColor(Color.GRAY);
+//        iconView.makeLayout(UI.FILL_PARENT,UI.FILL_PARENT);
+//        view.addView(iconView);
+
+
 
 
         view.setRoundAngle(DisplayUtil.dip(20));
-        view.setShadow(Color.BLACK,defaultMargin());
+        view.setShadow(Color.RED,defaultMargin());
 
 //        MyButton btn = new MyButton(context);
 //        btn.setText("测试");
@@ -72,6 +85,7 @@ public class TestView extends MyView {
 //        });
 //
         this.addView(view);
+        this.addView(view2);
 
 
         view.setOnClickListener(v->{

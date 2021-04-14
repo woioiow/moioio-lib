@@ -5,19 +5,16 @@ import android.content.Context;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Outline;
-import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.os.Build;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.RelativeLayout;
 
 import com.moioio.android.easyui.UIConf;
-import com.moioio.android.easyui.widget.MyLayout;
+import com.moioio.android.easyui.widget.round.RoundHelper;
 import com.moioio.android.g2d.Graphics;
 import com.moioio.android.util.DisplayUtil;
 import com.moioio.android.util.ViewUtil;
@@ -32,13 +29,17 @@ public abstract class MyView extends RelativeLayout {
     private int margin;
     private int line;
 
-
+    RoundHelper mHelper;
     public MyView(Context context) {
         super(context);
         margin = DisplayUtil.getDip(context,5);
         line = DisplayUtil.getDip(context,1);
         initPage(context);
         ViewUtil.setViewID(this);
+        setBackgroundColor(Color.parseColor("#00000000"));
+        mHelper = new RoundHelper();
+        mHelper.init();
+
     }
 
     public abstract void initPage(Context context);
@@ -164,23 +165,27 @@ public abstract class MyView extends RelativeLayout {
     boolean isClipRound;
     public void setRoundAngle(float angle)
     {
-        clipAngle = angle;
+//        MyLog.debug(this+"mHelper.setRoundAngle():::"+mHelper.isUse());
+        mHelper.setRadius(angle);
         if(clipAngle>0)
         {
             isClipRound = true;
         }
+//        invalidate();
 //        clipRoundView();
     }
 
     public void setShadow(int color,int border)
     {
-        setShadowColor(color);
-        setShadowBorder(border);
+        mHelper.setStrokeColor(color);
+        mHelper.setStrokeWidth(border);
+
     }
 
 
     public void setShadowColor(int color)
     {
+//        mHelper.setShadowColor(color);
         shadowColor = color;
         isClipRound = true;
     }
@@ -188,66 +193,141 @@ public abstract class MyView extends RelativeLayout {
     public void setShadowBorder(int border)
     {
         shadowBorder = border;
-        isClipRound = true;
-        rectFPath = new RectF(shadowBorder, shadowBorder, getMeasuredWidth()-shadowBorder, getMeasuredHeight()-shadowBorder);
-        if(shadowBorder!=0)
-        {
-            blurMaskFilter = new BlurMaskFilter(shadowBorder, BlurMaskFilter.Blur.OUTER);
-        }
-        else
-        {
-            blurMaskFilter = null;
-        }
+//        mHelper.setShadowBorder(border);
+//        isClipRound = true;
+//        rectFPath = new RectF(shadowBorder, shadowBorder, getMeasuredWidth()-shadowBorder, getMeasuredHeight()-shadowBorder);
+//        if(shadowBorder!=0)
+//        {
+//            blurMaskFilter = new BlurMaskFilter(shadowBorder, BlurMaskFilter.Blur.OUTER);
+//        }
+//        else
+//        {
+//            blurMaskFilter = null;
+//        }
     }
-    PaintFlagsDrawFilter pfd;
-
-
-    private void initGraphics()
-    {
-
-
-    }
-
-
-
+//    PaintFlagsDrawFilter pfd;
 
 
     @Override
-    protected void dispatchDraw(Canvas canvas) {
+    public void draw(Canvas canvas) {
 
-        if(isClipRound)
-        {
-            if(g==null)
-            {
 
-                path = new Path();
-                g = new Graphics();
-                g.paint.setAntiAlias(true);
-                pfd = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG);
-                canvas.setDrawFilter(pfd);
-                rectFPath = new RectF(shadowBorder, shadowBorder, getWidth()-shadowBorder, getHeight()-shadowBorder);
-            }
-            g.setCanvas(canvas);
-            g.getCanvas().setDrawFilter(pfd);
-            path.reset();
-            path.addRoundRect(rectFPath, clipAngle,clipAngle, Path.Direction.CW);
-            if(blurMaskFilter!=null)
-            {
-                g.setColor(shadowColor);
-                g.setMaskFilter(blurMaskFilter);
-                g.setColor(Color.BLACK);
-                g.fillPath(path);
-                g.setMaskFilter(null);
-            }
+//        MyLog.debug(this+"mHelper.isUse():::"+mHelper.isUse());
+        mHelper.preDraw(canvas);
+        super.draw(canvas);
+        mHelper.drawPath(canvas);
 
-            g.setColor(Color.BLACK);
-            g.fillPath(path);
-            g.setClipArea(path);
-        }
-        super.dispatchDraw(canvas);
-
+//        if(mHelper.isUse())
+//        {
+//        }
+//        else
+//        {
+//            super.draw(canvas);
+//        }
 
     }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mHelper.onSizeChanged(w, h);
+    }
+
+//
+//
+//
+
+//    @Override
+//    public void draw(Canvas canvas) {
+//        super.draw(canvas);
+//        MyLog.debug("canvas::::"+canvas);
+//    }
+//
+//
+//    RectF mRectF = new RectF();
+//    Xfermode mXfermode;
+//    @Override
+//    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+//        super.onSizeChanged(w, h, oldw, oldh);
+//        mRectF.set(0, 0, w, h);
+//    }
+//    float[] mRadii;
+//
+//    @Override
+//    public void draw(Canvas canvas) {
+//
+//
+//        canvas.saveLayer(mRectF, null, Canvas.ALL_SAVE_FLAG);
+//
+//
+//
+//
+//
+//
+//
+//
+//        if(isClipRound)
+//        {
+//            if(g==null)
+//            {
+//
+//                path = new Path();
+//                g = new Graphics();
+//                g.paint.setAntiAlias(true);
+//                pfd = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG);
+//                canvas.setDrawFilter(pfd);
+//                rectFPath = new RectF(shadowBorder, shadowBorder, getWidth()-shadowBorder, getHeight()-shadowBorder);
+//                mXfermode = new PorterDuffXfermode(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PorterDuff.Mode.DST_OUT : PorterDuff.Mode.DST_IN);
+//
+//                mRadii = new float[8];
+//                for(int i=0;i<mRadii.length;i++)
+//                {
+//                    mRadii[i] = clipAngle;
+//                }
+//            }
+//            g.setCanvas(canvas);
+//            g.getCanvas().setDrawFilter(pfd);
+//
+//            path.reset();
+//
+////            path.addRoundRect(rectFPath, clipAngle,clipAngle, Path.Direction.CW);
+//            path.addRoundRect(rectFPath, mRadii, Path.Direction.CCW);
+////            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+////                mTempPath.reset();
+////                mTempPath.addRect(mRectF, Path.Direction.CCW);
+////                mTempPath.op(mPath, Path.Op.DIFFERENCE);
+////                canvas.drawPath(mTempPath, mPaint);
+////            } else {
+////                canvas.drawPath(mPath, mPaint);
+////            }
+//
+//
+////            if(blurMaskFilter!=null)
+////            {
+////                g.setColor(shadowColor);
+////                g.setMaskFilter(blurMaskFilter);
+////                g.setColor(Color.BLACK);
+////                g.fillPath(path);
+////                g.setMaskFilter(null);
+////            }
+//
+//            g.setColor(Color.BLACK);
+//            g.fillPath(path);
+////            g.setClipArea(path);
+//            super.draw(canvas);
+//            g.setColor(Color.BLACK);
+//            g.fillRect(0,0,getWidth(),getHeight());
+//
+//        }
+//        else
+//            {
+//                super.draw(canvas);
+//            }
+//
+//        MyLog.debug(this+"getWidth():::"+getWidth());
+//        MyLog.debug(this+"getHeight():::"+getHeight());
+//
+//    }
 
 
 //    private void clipRoundView() {
@@ -260,10 +340,6 @@ public abstract class MyView extends RelativeLayout {
 //                    outline.set
 //                }
 //            };
-//            //重新设置形状
-//            setOutlineProvider(viewOutlineProvider);
-//            //添加背景或者是ImageView的时候失效，添加如下设置
-//            setClipToOutline(true);
 //        }
 //    }
 
