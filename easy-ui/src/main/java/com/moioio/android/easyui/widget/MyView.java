@@ -35,11 +35,10 @@ public abstract class MyView extends RelativeLayout {
         margin = DisplayUtil.getDip(context,5);
         line = DisplayUtil.getDip(context,1);
         setBackgroundColor(0);
-        initPage(context);
-        ViewUtil.setViewID(this);
         mHelper = new RoundHelper();
         mHelper.init();
-
+        ViewUtil.setViewID(this);
+        initPage(context);
     }
 
     public abstract void initPage(Context context);
