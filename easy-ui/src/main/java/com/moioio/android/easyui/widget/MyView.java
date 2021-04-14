@@ -5,11 +5,15 @@ import android.content.Context;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Outline;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.widget.RelativeLayout;
 
 import com.moioio.android.easyui.UIConf;
@@ -17,6 +21,7 @@ import com.moioio.android.easyui.widget.MyLayout;
 import com.moioio.android.g2d.Graphics;
 import com.moioio.android.util.DisplayUtil;
 import com.moioio.android.util.ViewUtil;
+import com.moioio.util.MyLog;
 
 
 public abstract class MyView extends RelativeLayout {
@@ -164,6 +169,7 @@ public abstract class MyView extends RelativeLayout {
         {
             isClipRound = true;
         }
+//        clipRoundView();
     }
 
     public void setShadow(int color,int border)
@@ -195,6 +201,17 @@ public abstract class MyView extends RelativeLayout {
     }
     PaintFlagsDrawFilter pfd;
 
+
+    private void initGraphics()
+    {
+
+
+    }
+
+
+
+
+
     @Override
     protected void dispatchDraw(Canvas canvas) {
 
@@ -202,15 +219,13 @@ public abstract class MyView extends RelativeLayout {
         {
             if(g==null)
             {
+
                 path = new Path();
                 g = new Graphics();
                 g.paint.setAntiAlias(true);
-//                g.grap.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALILAS_FLAG | Paint.FLITER_BITMAP_FLAG))
-
                 pfd = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG);
                 canvas.setDrawFilter(pfd);
-
-                rectFPath = new RectF(shadowBorder, shadowBorder, getMeasuredWidth()-shadowBorder, getMeasuredHeight()-shadowBorder);
+                rectFPath = new RectF(shadowBorder, shadowBorder, getWidth()-shadowBorder, getHeight()-shadowBorder);
             }
             g.setCanvas(canvas);
             g.getCanvas().setDrawFilter(pfd);
@@ -220,15 +235,37 @@ public abstract class MyView extends RelativeLayout {
             {
                 g.setColor(shadowColor);
                 g.setMaskFilter(blurMaskFilter);
+                g.setColor(Color.BLACK);
                 g.fillPath(path);
                 g.setMaskFilter(null);
-                g.setColor(Color.WHITE);
             }
-            canvas.clipPath(path);
-        }
 
+            g.setColor(Color.BLACK);
+            g.fillPath(path);
+            g.setClipArea(path);
+        }
         super.dispatchDraw(canvas);
+
+
     }
+
+
+//    private void clipRoundView() {
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+//            ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
+//                @Override
+//                public void getOutline(View view, Outline outline) {
+//                    //修改outline为特定形状
+//                    outline.setRoundRect(0, 0, getMeasuredWidth(), getMeasuredHeight(), clipAngle);
+//                    outline.set
+//                }
+//            };
+//            //重新设置形状
+//            setOutlineProvider(viewOutlineProvider);
+//            //添加背景或者是ImageView的时候失效，添加如下设置
+//            setClipToOutline(true);
+//        }
+//    }
 
 
 }

@@ -1,11 +1,18 @@
 package com.moioio.moioio_lib;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.widget.ImageView;
 
+import com.moioio.android.MyAndroidLib;
 import com.moioio.android.easyui.UI;
 import com.moioio.android.easyui.widget.MyGifView;
+import com.moioio.android.easyui.widget.MyImageView;
 import com.moioio.android.easyui.widget.MyLayout;
+import com.moioio.android.easyui.widget.MyLayoutView;
 import com.moioio.android.easyui.widget.MyView;
+import com.moioio.android.util.BitmapUtil;
+import com.moioio.android.util.DisplayUtil;
 
 public class TestView extends MyView {
 
@@ -19,10 +26,10 @@ public class TestView extends MyView {
     @Override
     public void initPage(Context context) {
 
-        myGifView = new MyGifView(context);
-        myGifView.load("assets://ic_game.gif");
-        myGifView.setDelay(0);
-        myGifView.makeLayout().center();
+//        myGifView = new MyGifView(context);
+//        myGifView.load("assets://ic_game.gif");
+//        myGifView.setDelay(0);
+//        myGifView.makeLayout().center();
 
 //        gameView = new GameView(context);
 //
@@ -34,6 +41,22 @@ public class TestView extends MyView {
 //        this.addView(gameView);
 
 
+        MyAndroidLib.init(context);
+
+        MyLayoutView view = new MyLayoutView(context);
+        view.makeLayout(DisplayUtil.dip(200),DisplayUtil.dip(200))
+        .center();
+
+        MyImageView iconView = new MyImageView(context);
+        iconView.setScaleType(ImageView.ScaleType.FIT_XY);
+        iconView.setImageBitmap(BitmapUtil.getAssetsBitmap(context,"assets://test.jpg"));
+        iconView.makeLayout(UI.WRAP_CONTENT,UI.WRAP_CONTENT);
+
+        view.addView(iconView);
+
+
+        view.setRoundAngle(DisplayUtil.dip(20));
+        view.setShadow(Color.BLACK,defaultMargin());
 
 //        MyButton btn = new MyButton(context);
 //        btn.setText("测试");
@@ -48,7 +71,11 @@ public class TestView extends MyView {
 //
 //        });
 //
-        this.addView(myGifView);
+        this.addView(view);
 
+
+        view.setOnClickListener(v->{
+            v.requestLayout();
+        });
     }
 }
