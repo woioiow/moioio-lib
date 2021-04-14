@@ -26,6 +26,7 @@ public class TestView extends MyView {
     MyGifView myGifView;
     @Override
     public void initPage(Context context) {
+        setBackgroundColor(Color.BLUE);
 
 //        myGifView = new MyGifView(context);
 //        myGifView.load("assets://ic_game.gif");
@@ -64,7 +65,6 @@ public class TestView extends MyView {
 //        iconView.setBackgroundColor(Color.GRAY);
 //        iconView.makeLayout(UI.FILL_PARENT,UI.FILL_PARENT);
 //        view.addView(iconView);
-
 
 
 

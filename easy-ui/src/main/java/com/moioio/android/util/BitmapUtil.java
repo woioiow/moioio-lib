@@ -125,7 +125,7 @@ public class BitmapUtil {
                 1, 0f, 0, 0, r,
                 0, 1, 0f, 0, g,
                 0, 0, 1, 0f, b,
-                0, 0, 0, 1f, a};
+                0, 0, 0, 1f, 0};
 
         ColorMatrix colorMatrix = new ColorMatrix();
         colorMatrix.set(colorTransform); //Apply the Red

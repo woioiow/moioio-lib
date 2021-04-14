@@ -34,9 +34,9 @@ public abstract class MyView extends RelativeLayout {
         super(context);
         margin = DisplayUtil.getDip(context,5);
         line = DisplayUtil.getDip(context,1);
+        setBackgroundColor(0);
         initPage(context);
         ViewUtil.setViewID(this);
-        setBackgroundColor(Color.parseColor("#00000000"));
         mHelper = new RoundHelper();
         mHelper.init();
 
