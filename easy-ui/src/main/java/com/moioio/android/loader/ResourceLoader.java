@@ -60,7 +60,7 @@ public class ResourceLoader {
     public static File getCacheFile(Context context,String url,String md5,boolean isUseMd5)
     {
         String cachePath = AppFileUtil.makeCachePath(context,"cache");
-        String path = cachePath+FileUtil.getCachFilePath(cachePath,url);
+        String path = FileUtil.getCachFilePath(cachePath,url);
         if(isUseMd5)
         {
             path = cachePath+md5;

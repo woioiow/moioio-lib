@@ -24,6 +24,14 @@ import java.io.InputStream;
 public class AppFileUtil {
 
 
+    public static String toFileAssets(String name)
+    {
+        String path = "file:///android_assets/"+name;
+
+        return path;
+    }
+
+
     public static String makeCachePath(Context context, String name) {
         String path = "";
 
