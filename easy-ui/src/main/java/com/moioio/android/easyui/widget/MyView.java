@@ -164,15 +164,27 @@ public abstract class MyView extends RelativeLayout {
     boolean isClipRound;
     public void setRoundAngle(float angle)
     {
-//        MyLog.debug(this+"mHelper.setRoundAngle():::"+mHelper.isUse());
         mHelper.setRadius(angle);
         if(clipAngle>0)
         {
             isClipRound = true;
         }
-//        invalidate();
-//        clipRoundView();
     }
+    public void setRoundAngle(float[] angles)
+    {
+        if(angles==null||angles.length!=4)
+        {
+            return;
+        }
+        mHelper.setRadius(angles[0],angles[1],angles[2],angles[3]);
+
+        if(clipAngle>0)
+        {
+            isClipRound = true;
+        }
+    }
+
+
 
     public void setShadow(int color,int border)
     {

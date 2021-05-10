@@ -68,7 +68,7 @@ public class TestView extends MyView {
 
 
 
-        view.setRoundAngle(DisplayUtil.dip(20));
+        view.setRoundAngle(new float[]{DisplayUtil.dip(20),DisplayUtil.dip(20),0,0});
         view.setShadow(Color.RED,defaultMargin());
 
 //        MyButton btn = new MyButton(context);

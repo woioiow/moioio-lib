@@ -118,6 +118,7 @@ public class RoundHelper {
         mPaint.setXfermode(mXfermode);
 
         mPath.addRoundRect(mRectF, mRadii, Path.Direction.CCW);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             mTempPath.reset();
             mTempPath.addRect(mRectF, Path.Direction.CCW);
@@ -157,8 +158,11 @@ public class RoundHelper {
         mRadiusBottomLeft = radiusPx;
         mRadiusBottomRight = radiusPx;
         setData();
-
     }
+
+
+
+
 
     public void setRadius(float radiusTopLeftDp, float radiusTopRightDp, float radiusBottomLeftDp, float radiusBottomRightDp) {
 

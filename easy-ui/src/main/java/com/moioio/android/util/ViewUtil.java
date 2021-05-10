@@ -4,6 +4,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Outline;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -187,6 +188,22 @@ public class ViewUtil {
         blue = 255 - blue;
 
         return Color.argb(alpha,red,green,blue);
+    }
+
+    public void changeViewColor(View view)
+    {
+        if(view.getBackground()!=null)
+        {
+            view.getBackground().setColorFilter(0x00000000, PorterDuff.Mode.SRC_ATOP);
+        }
+//        if(view.getProgressDrawable()!=null)
+//        {
+//            view.getProgressDrawable().setColorFilter(0xFFFFFFFF, PorterDuff.Mode.SRC_ATOP);
+//        }
+//        if(view.getThumb()!=null)
+//        {
+//            view.getThumb().setColorFilter(0xFFFFFFFF, PorterDuff.Mode.SRC_ATOP);
+//        }
     }
 
 }
