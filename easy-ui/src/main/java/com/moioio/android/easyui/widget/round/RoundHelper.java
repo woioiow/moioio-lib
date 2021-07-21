@@ -57,7 +57,8 @@ public class RoundHelper {
             mPaint = new Paint();
             mPath = new Path();
             mTempPath = new Path();
-            mXfermode = new PorterDuffXfermode(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PorterDuff.Mode.DST_OUT : PorterDuff.Mode.DST_IN);
+//            mXfermode = new PorterDuffXfermode(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PorterDuff.Mode.DST_OUT : PorterDuff.Mode.DST_IN);
+            mXfermode = new PorterDuffXfermode(PorterDuff.Mode.XOR);
         }
 
 

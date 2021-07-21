@@ -56,7 +56,7 @@ public class Graphics
     private Matrix matrix = new Matrix();
     private DashPathEffect dashPathEffect = new DashPathEffect(new float[]{7, 7}, 0);
 
-
+    private int canvasInitSave;
     public Graphics()
     {
         paint = new Paint();
@@ -74,7 +74,7 @@ public class Graphics
         paint = new Paint();
         paint.setAntiAlias(true);
         paint.setDither(true);
-
+        canvasInitSave = canvas.save();
 //        textPaint = new TextPaint();
 //        textPaint.setAntiAlias(true);
 //        textPaint.setDither(true);
@@ -87,6 +87,7 @@ public class Graphics
     public void setCanvas(Canvas canvas)
     {
         grap = canvas;
+        canvasInitSave = canvas.save();
     }
 
 
@@ -204,6 +205,8 @@ public class Graphics
         clip.set(x+offX, y+offY, x+offX + width, y+offY + height);
 //        grap.clipRect(clip, Region.Op.REPLACE);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+            grap.restore();
+            grap.save();
             grap.clipRect(clip );//p,
         }else {
             grap.clipRect(clip, Region.Op.REPLACE);
@@ -225,6 +228,8 @@ public class Graphics
     {
         clip.set(x+offX, y+offY, x+offX + width, y+offY + height);
         if(Build.VERSION.SDK_INT >= 26){
+            grap.restore();
+            grap.save();
             grap.clipOutRect(clip );//p, android.graphics.Region.Op.REPLACE
         }else {
             grap.clipRect(clip, op);

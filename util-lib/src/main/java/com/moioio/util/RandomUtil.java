@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomUtil {
+    static Random rand = new Random();
 
 
     public static void makeRandomList(List list)
@@ -45,10 +46,9 @@ public class RandomUtil {
         }
 
         int[] result = new int[n];
-        Random rd = new Random();
         int index = 0;
         for (int i = 0; i < result.length; i++) {
-            index = Math.abs(rd.nextInt() % len--);
+            index = Math.abs(rand.nextInt() % len--);
             result[i] = source[index];
             source[index] = source[len];
         }
@@ -57,20 +57,17 @@ public class RandomUtil {
 
 
     public static int getRandom(int size) {
-        Random rand = new Random();
         int which = Math.abs(rand.nextInt()%size);
         return which;
     }
 
     public static int getRandomNoSign(int size) {
-        Random rand = new Random();
         int which = rand.nextInt()%size;
         return which;
     }
 
     public static String getRandomStr(String[] letters)
     {
-        Random rand = new Random();
         int which = Math.abs(rand.nextInt()%letters.length);
         String s = letters[which];
         return s;

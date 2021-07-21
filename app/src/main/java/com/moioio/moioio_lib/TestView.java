@@ -1,11 +1,14 @@
 package com.moioio.moioio_lib;
 
+import android.app.Activity;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.widget.ImageView;
 
 import com.moioio.android.MyAndroidLib;
 import com.moioio.android.easyui.UI;
+import com.moioio.android.easyui.widget.MyEditText;
 import com.moioio.android.easyui.widget.MyGifView;
 import com.moioio.android.easyui.widget.MyImageView;
 import com.moioio.android.easyui.widget.MyLayout;
@@ -14,6 +17,7 @@ import com.moioio.android.easyui.widget.MyView;
 import com.moioio.android.util.BitmapUtil;
 import com.moioio.android.util.DisplayUtil;
 import com.moioio.android.util.ViewUtil;
+import com.moioio.util.MyLog;
 
 public class TestView extends MyView {
 
@@ -27,6 +31,7 @@ public class TestView extends MyView {
     @Override
     public void initPage(Context context) {
         setBackgroundColor(Color.BLUE);
+        registerClipListener(getActivity());
 
 //        myGifView = new MyGifView(context);
 //        myGifView.load("assets://ic_game.gif");
@@ -83,13 +88,57 @@ public class TestView extends MyView {
 //        btn.setOnClickListener(v->{
 //
 //        });
+
+        MyEditText myEditText = new MyEditText(context);
+        myEditText.makeLayout(UI.FILL_PARENT,UI.WRAP_CONTENT);
+
+
 //
         this.addView(view);
         this.addView(view2);
+        this.addView(myEditText);
 
 
         view.setOnClickListener(v->{
             v.requestLayout();
         });
     }
+
+
+    ClipboardManager mClipboardManager;
+    ClipboardManager.OnPrimaryClipChangedListener mOnPrimaryClipChangedListener;
+    private void registerClipListener(Activity activity) {
+        mClipboardManager = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
+        mOnPrimaryClipChangedListener = new ClipboardManager.OnPrimaryClipChangedListener() {
+            @Override
+            public void onPrimaryClipChanged() {
+
+
+
+                if (mClipboardManager.hasPrimaryClip()
+                        && mClipboardManager.getPrimaryClip().getItemCount() > 0) {
+                    // 获取复制、剪切的文本内容
+                    CharSequence content = mClipboardManager.getPrimaryClip().getItemAt(0).getText();
+                    MyLog.debug( "复制、剪切的内容为：" + content);
+                }
+            }
+        };
+        mClipboardManager.addPrimaryClipChangedListener(mOnPrimaryClipChangedListener);
+    }
+
+
+    private void clearClipListener()
+    {
+        try {
+            if (mClipboardManager != null && mOnPrimaryClipChangedListener != null) {
+                mClipboardManager.removePrimaryClipChangedListener(mOnPrimaryClipChangedListener);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
 }
