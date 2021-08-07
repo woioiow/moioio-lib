@@ -190,6 +190,28 @@ public class FileUtil
         return path;
     }
 
+//    public static void main(String[] args)
+//    {
+//        MyLog.debug(getSuffix("E:\\tme\\album\\279085261\\5.wav"));
+//    }
+
+    public static String getNameWithoutSuffix(String path) {
+
+        String name = new File(path).getName();
+        int lastIndexOf = name.lastIndexOf(".");
+        if(lastIndexOf!=-1)
+        {
+            name = name.substring(0,lastIndexOf);
+            return name;
+        }
+        else
+        {
+            return name;
+        }
+    }
+
+
+
     public static String getSuffixFromUrl(String url)
     {
         if (!StringUtil.isNull(url))
