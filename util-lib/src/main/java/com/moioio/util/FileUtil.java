@@ -9,13 +9,14 @@ public class FileUtil
 {
 
 
-    public static String getCachFilePath(String cachePath,String url)
+    public static String getCacheFilePath(String cachePath,String url)
     {
         String name = CodeUtil.md5(url);
         String path = cachePath+name;
         return path;
-    }
 
+
+    }
     public static void copyFile(String oldPath, String newPath) {
         try {
             File file = new File(newPath);
