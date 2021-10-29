@@ -1,6 +1,7 @@
 package com.moioio.util;
 
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Set;
@@ -8,11 +9,11 @@ import java.util.Set;
 public class MDL {
 
 
-    public LinkedHashMap<String,Object> hashMap;
+    public HashMap<String,Object> hashMap;
 
     public MDL()
     {
-        hashMap = new LinkedHashMap<>();
+        hashMap = new HashMap<>();
     }
 
     public String toString()
@@ -49,6 +50,11 @@ public class MDL {
         }
 
         return ret;
+    }
+
+    public HashMap getMap()
+    {
+        return hashMap;
     }
 
     public String getString(String key)
