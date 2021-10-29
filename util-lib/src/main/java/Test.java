@@ -5,7 +5,7 @@ public class Test {
 
     public static void main(String[] args)
     {
-        String str = "[page:1,size:20,go:name]";
+//        String str = "[page:1,size:20,go:name]";
 //        MDL mdl = MDL.parse(str);
         MDL mdl = MDL.Builder.create().add("page",1).get();
         MyLog.log("mdl:"+mdl.getInt("page"));
