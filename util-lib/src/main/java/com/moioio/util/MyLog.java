@@ -17,6 +17,13 @@ public class MyLog {
         }
     }
 
+    public static void log(Object obj)
+    {
+        if(DEBUG)
+        {
+            System.out.println("mylog---"+obj);
+        }
+    }
 
 
     public static void showAllStackTraces()
