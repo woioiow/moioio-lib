@@ -1,6 +1,7 @@
 package com.moioio.util;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.PrintStream;
 import java.util.Iterator;
 import java.util.Map;
@@ -15,6 +16,7 @@ public class MyLog {
         {
             System.out.println("mylog---"+obj);
         }
+
     }
 
     public static void log(Object obj)

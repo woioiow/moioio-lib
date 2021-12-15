@@ -88,19 +88,20 @@ public abstract class MyDrawView extends View
         int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
         int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
-        w = widthSpecSize;
-        h = heightSpecSize;
-        if(!isInit)
-        {
-            init();
-            isInit = true;
-        }
+
     }
 
 
     protected void onDraw(Canvas canvas)
     {
         super.onDraw(canvas);
+        w = getWidth();
+        h = getHeight();
+        if(!isInit)
+        {
+            init();
+            isInit = true;
+        }
         g.setWidth(w);
         g.setHeight(h);
         g.setCanvas(canvas);
