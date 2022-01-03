@@ -21,17 +21,16 @@ import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.Xfermode;
 import android.os.Build;
-import android.text.TextPaint;
 
 
 public class Graphics
 {
 
 
-    float width;
-    float height;
+    private float width;
+    private float height;
 
-    public Canvas grap ;
+    public Canvas canvas;
     public Paint paint;
 
     private RectF clip;
@@ -41,10 +40,14 @@ public class Graphics
     private Matrix matrix;
     private DashPathEffect dashPathEffect;
     private Matrix pathM;
+    private float offX;
+    private float offY;
+    private Rect stringRect;
 
     private int canvasInitSave;
     public Graphics()
     {
+        stringRect = new Rect();
         oval = new RectF();
         rect = new RectF();
         clip  = new RectF();
@@ -63,7 +66,7 @@ public class Graphics
     public Graphics(Canvas canvas)
     {
         this();
-        grap = canvas;
+        this.canvas = canvas;
         canvasInitSave = canvas.save();
 //        textPaint = new TextPaint();
 //        textPaint.setAntiAlias(true);
@@ -75,7 +78,7 @@ public class Graphics
 
     public void setCanvas(Canvas canvas)
     {
-        grap = canvas;
+        this.canvas = canvas;
         canvasInitSave = canvas.save();
     }
 
@@ -84,11 +87,11 @@ public class Graphics
         matrix.reset();
         matrix.setScale(sx, sy);
         matrix.postTranslate(x+offX, y+offY);
-        grap.drawBitmap(img,matrix, paint);
+        canvas.drawBitmap(img,matrix, paint);
     }
 
     public void drawImage(Bitmap img, float x, float y) {
-        grap.drawBitmap(img, x+offX, y+offY, paint);
+        canvas.drawBitmap(img, x+offX, y+offY, paint);
     }
 
     public void setXfermode(int type)
@@ -138,7 +141,7 @@ public class Graphics
 
     public void fillRect(float x, float y, float width, float height) {
         paint.setStyle(Paint.Style.FILL);
-        grap.drawRect(x+offX, y+offY, x+offX + width, y+offY + height, paint);
+        canvas.drawRect(x+offX, y+offY, x+offX + width, y+offY + height, paint);
 
     }
 
@@ -147,7 +150,7 @@ public class Graphics
     {
         paint.setStyle(Paint.Style.FILL);
         rect.set(x+offX, y+offY, x+offX + width, y+offY + height);
-        grap.drawRoundRect(rect, arcWidth, arcHeight, paint);
+        canvas.drawRoundRect(rect, arcWidth, arcHeight, paint);
     }
 
     public void fillArc(float x, float y, float width, float height, float startAngle,
@@ -156,7 +159,7 @@ public class Graphics
         paint.setStyle(Paint.Style.FILL);
         rect.set(x+offX, y+offY, x+offX + width, y+offY + height);
 //        grap.drawArc(rect, -(startAngle+arcAngle), arcAngle, true, paint);
-        grap.drawArc(rect, startAngle, arcAngle, true, paint);
+        canvas.drawArc(rect, startAngle, arcAngle, true, paint);
     }
 
     public void drawArc(int x, int y, int width, int height, int startAngle,
@@ -164,19 +167,19 @@ public class Graphics
     {
         paint.setStyle(Paint.Style.STROKE);
         rect.set(x+offX, y+offY, x+offX + width, y+offY + height);
-        grap.drawArc(rect, -(startAngle+arcAngle), arcAngle, true, paint);
+        canvas.drawArc(rect, -(startAngle+arcAngle), arcAngle, true, paint);
     }
 
     public void drawLine(float x1, float y1, float x2, float y2)
     {
         paint.setStyle(Paint.Style.STROKE);
-        grap.drawLine(x1+offX, y1+offY, x2+offX, y2+offY, paint);
+        canvas.drawLine(x1+offX, y1+offY, x2+offX, y2+offY, paint);
     }
 
     public void fillLine(float x, float y, float w, float h)
     {
         paint.setStyle(Paint.Style.STROKE);
-        grap.drawLine(x+offX, y+offY, x+offX+w, y+offY+h, paint);
+        canvas.drawLine(x+offX, y+offY, x+offX+w, y+offY+h, paint);
     }
 
 
@@ -186,7 +189,7 @@ public class Graphics
         matrix.reset();
         matrix.setRotate(angle);
         matrix.postTranslate(x+offX, y+offY);
-        grap.drawBitmap(img,matrix, paint);
+        canvas.drawBitmap(img,matrix, paint);
     }
 
     public void setClip(int x, int y, int width, int height)
@@ -194,22 +197,22 @@ public class Graphics
         clip.set(x+offX, y+offY, x+offX + width, y+offY + height);
 //        grap.clipRect(clip, Region.Op.REPLACE);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
-            grap.restore();
-            grap.save();
-            grap.clipRect(clip );//p,
+            canvas.restore();
+            canvas.save();
+            canvas.clipRect(clip );//p,
         }else {
-            grap.clipRect(clip, Region.Op.REPLACE);
+            canvas.clipRect(clip, Region.Op.REPLACE);
         }
     }
 
     public void save()
     {
-        grap.save();
+        canvas.save();
     }
 
     public void restore()
     {
-        grap.restore();
+        canvas.restore();
     }
 
 
@@ -217,11 +220,11 @@ public class Graphics
     {
         clip.set(x+offX, y+offY, x+offX + width, y+offY + height);
         if(Build.VERSION.SDK_INT >= 26){
-            grap.restore();
-            grap.save();
-            grap.clipOutRect(clip );//p, android.graphics.Region.Op.REPLACE
+            canvas.restore();
+            canvas.save();
+            canvas.clipOutRect(clip );//p, android.graphics.Region.Op.REPLACE
         }else {
-            grap.clipRect(clip, op);
+            canvas.clipRect(clip, op);
         }
     }
 
@@ -234,12 +237,12 @@ public class Graphics
     public void drawRoundRect(float x, float y, float width, float height, float arcWidth, float arcHeight) {
         paint.setStyle(Paint.Style.STROKE);
         rect.set(x+offX, y+offY, x+offX + width, y+offY + height);
-        grap.drawRoundRect(rect, arcWidth, arcHeight, paint);
+        canvas.drawRoundRect(rect, arcWidth, arcHeight, paint);
     }
 
     public void drawRect(float x, float y, float width, float height) {
         paint.setStyle(Paint.Style.STROKE);
-        grap.drawRect(x+offX, y+offY, x+offX + width, y+offY + height, paint);
+        canvas.drawRect(x+offX, y+offY, x+offX + width, y+offY + height, paint);
     }
 
     public void drawRect(RectF rectF,Matrix matrix) {
@@ -251,7 +254,7 @@ public class Graphics
         paint.setStyle(Paint.Style.STROKE);
         PathEffect pathEffect =paint.getPathEffect();
         paint.setPathEffect(dashPathEffect);
-        grap.drawRect(x+offX, y+offY, x+offX + width, y+offY + height, paint);
+        canvas.drawRect(x+offX, y+offY, x+offX + width, y+offY + height, paint);
         paint.setPathEffect(pathEffect);
     }
 
@@ -259,26 +262,26 @@ public class Graphics
     {
         paint.setStyle(Paint.Style.FILL);
         oval.set(x+offX, y+offY, x+offX + width, y+offY + height);
-        grap.drawOval(oval, paint);
+        canvas.drawOval(oval, paint);
     }
 
     public void fillCircle(float x, float y, float radius)
     {
         paint.setStyle(Paint.Style.FILL);
-        grap.drawCircle(x+offX, y+offY,radius, paint);
+        canvas.drawCircle(x+offX, y+offY,radius, paint);
     }
 
     public void drawCircle(float x, float y, float radius)
     {
         paint.setStyle(Paint.Style.STROKE);
-        grap.drawCircle(x+offX, y+offY,radius, paint);
+        canvas.drawCircle(x+offX, y+offY,radius, paint);
     }
 
     public void drawOval(int x, int y, int width, int height)
     {
         paint.setStyle(Paint.Style.STROKE);
         oval.set(x+offX, y+offY, x+offX + width, y+offY + height);
-        grap.drawOval(oval, paint);
+        canvas.drawOval(oval, paint);
 
     }
 
@@ -305,7 +308,7 @@ public class Graphics
         paint.getTextBounds(str, 0, str.length(), fontTmpRect);
         float dx = x+offX  - fontTmpRect.left;
         float dy = y+offY + fontTmpRect.height() - fontTmpRect.bottom;
-        grap.drawText(str,dx,dy,paint);
+        canvas.drawText(str,dx,dy,paint);
     }
 
 
@@ -315,12 +318,11 @@ public class Graphics
         paint.getTextBounds(str, 0, str.length(), fontTmpRect);
         float dx = x+offX  - fontTmpRect.left;
         float dy = y+offY + fontTmpRect.height() - fontTmpRect.bottom;
-        grap.drawText(str,dx,dy,paint);
+        canvas.drawText(str,dx,dy,paint);
         paint.setStrokeWidth(0);
     }
 
 
-    Rect stringRect = new Rect();
     public int getStringWidth(String str)
     {
         paint.getTextBounds(str, 0, str.length(), stringRect);
@@ -337,12 +339,8 @@ public class Graphics
 
 
     public void drawImage(Bitmap bmp, Matrix matrix) {
-        grap.drawBitmap(bmp,matrix,paint);
+        canvas.drawBitmap(bmp,matrix,paint);
     }
-
-
-
-
 
     public void fillPath(Path path) {
 
@@ -354,7 +352,7 @@ public class Graphics
             path.transform(pathM);
         }
 
-        grap.drawPath(path, paint);
+        canvas.drawPath(path, paint);
 
         if(offX!=0&&offY!=0)
         {
@@ -388,7 +386,6 @@ public class Graphics
 
     public void setFakeBoldText(boolean b) {
         paint.setFakeBoldText(b);
-
     }
 
     public void setTextSkewX(float v) {
@@ -408,7 +405,7 @@ public class Graphics
     }
 
     public void setMatrix(Matrix matrix) {
-        grap.setMatrix(matrix);
+        canvas.setMatrix(matrix);
     }
 
     public void setShadowLayer(float radius, float dx, float dy,  int shadowColor) {
@@ -424,7 +421,7 @@ public class Graphics
             path.transform(pathM);
         }
 
-        grap.clipPath(path);
+        canvas.clipPath(path);
 
         if(offX!=0&&offY!=0)
         {
@@ -444,7 +441,7 @@ public class Graphics
                 path.transform(pathM);
             }
 
-            grap.clipOutPath(path);
+            canvas.clipOutPath(path);
 
             if(offX!=0&&offY!=0)
             {
@@ -465,7 +462,7 @@ public class Graphics
             path.transform(pathM);
         }
 
-        grap.drawPath(path,paint);
+        canvas.drawPath(path,paint);
 
         if(offX!=0&&offY!=0)
         {
@@ -480,7 +477,7 @@ public class Graphics
     }
 
     public void clear() {
-        grap.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
     }
 
     public float getWidth() {
@@ -499,10 +496,6 @@ public class Graphics
         this.height = height;
     }
 
-
-    private float offX;
-    private float offY;
-
     public void translate(float x, float y) {
         offX = x;
         offY = y;
@@ -516,7 +509,7 @@ public class Graphics
 
 
     public Canvas getCanvas() {
-        return grap;
+        return canvas;
     }
 
 //    public ColorMatrix getColorMatrix() {
