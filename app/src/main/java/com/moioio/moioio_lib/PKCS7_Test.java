@@ -15,7 +15,7 @@ public class PKCS7_Test {
     static String d = "4099706666079904";
     public static void main(String[] args) throws InterruptedException {
         try {
-            String json = "haha";//""[{\"duration\":60000,\"page_name\":\"com.shinyv.cnr.SongNewActivity\"}]";
+            String json = "haha";
             String str = a(json);
             MyLog.debug(str);
         }

@@ -46,7 +46,8 @@ public class MainActivity extends MyActivity {
 //            e.printStackTrace();
 //        }
 
-        this.setContentView(new TestView(this));
+//        this.setContentView(new TestView(this));
+        this.setContentView(new TestDrawView(this));
 
 //        MyLog.debug("Build.TAGS:::"+Build.TAGS);
 

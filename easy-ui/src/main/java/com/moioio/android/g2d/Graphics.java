@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.moioio.android.g2d;
 
 import android.graphics.Bitmap;
@@ -29,11 +24,6 @@ import android.os.Build;
 import android.text.TextPaint;
 
 
-
-/**
- *
- * @author Thinkpad
- */
 public class Graphics
 {
 
@@ -43,26 +33,28 @@ public class Graphics
 
     public Canvas grap ;
     public Paint paint;
-//    public TextPaint textPaint = new TextPaint();
 
+    private RectF clip;
 
-
-//	private Path path = new Path();
-
-    private RectF clip  = new RectF();
-
-    private RectF rect = new RectF();
-    private RectF oval = new RectF();
-    private Matrix matrix = new Matrix();
-    private DashPathEffect dashPathEffect = new DashPathEffect(new float[]{7, 7}, 0);
+    private RectF rect;
+    private RectF oval;
+    private Matrix matrix;
+    private DashPathEffect dashPathEffect;
+    private Matrix pathM;
 
     private int canvasInitSave;
     public Graphics()
     {
+        oval = new RectF();
+        rect = new RectF();
+        clip  = new RectF();
+        matrix = new Matrix();
+        dashPathEffect = new DashPathEffect(new float[]{7, 7}, 0);
+        pathM = new Matrix();
+
         paint = new Paint();
         paint.setAntiAlias(true);
         paint.setDither(true);
-
 //        textPaint = new TextPaint();
 //        textPaint.setAntiAlias(true);
 //        textPaint.setDither(true);
@@ -70,17 +62,14 @@ public class Graphics
 
     public Graphics(Canvas canvas)
     {
+        this();
         grap = canvas;
-        paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setDither(true);
         canvasInitSave = canvas.save();
 //        textPaint = new TextPaint();
 //        textPaint.setAntiAlias(true);
 //        textPaint.setDither(true);
 
     }
-    //09-28 16:48:05.894: W/System.err(1356): java.lang.IllegalStateException: Immutable bitmap passed to Canvas constructor
 
 
 
@@ -187,7 +176,7 @@ public class Graphics
     public void fillLine(float x, float y, float w, float h)
     {
         paint.setStyle(Paint.Style.STROKE);
-        grap.drawLine(x, y, x+w, y+h, paint);
+        grap.drawLine(x+offX, y+offY, x+offX+w, y+offY+h, paint);
     }
 
 
@@ -351,12 +340,28 @@ public class Graphics
         grap.drawBitmap(bmp,matrix,paint);
     }
 
+
+
+
+
     public void fillPath(Path path) {
 
-        grap.translate(offX,offY);
         paint.setStyle(Paint.Style.FILL);
+        if(offX!=0&&offY!=0)
+        {
+            pathM.reset();
+            pathM.setTranslate(offX,offY);
+            path.transform(pathM);
+        }
+
         grap.drawPath(path, paint);
-        grap.translate(-offX,-offY);
+
+        if(offX!=0&&offY!=0)
+        {
+            pathM.reset();
+            pathM.setTranslate(-offX,-offY);
+            path.transform(pathM);
+        }
     }
 
 
@@ -412,19 +417,62 @@ public class Graphics
 
     public void setClipArea(Path path)
     {
-        grap.clipPath(path);//p,
+        if(offX!=0&&offY!=0)
+        {
+            pathM.reset();
+            pathM.setTranslate(offX,offY);
+            path.transform(pathM);
+        }
+
+        grap.clipPath(path);
+
+        if(offX!=0&&offY!=0)
+        {
+            pathM.reset();
+            pathM.setTranslate(-offX,-offY);
+            path.transform(pathM);
+        }
     }
     public void setClipAreaOut(Path path)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
         {
-            grap.clipOutPath(path);//p,
+            if(offX!=0&&offY!=0)
+            {
+                pathM.reset();
+                pathM.setTranslate(offX,offY);
+                path.transform(pathM);
+            }
+
+            grap.clipOutPath(path);
+
+            if(offX!=0&&offY!=0)
+            {
+                pathM.reset();
+                pathM.setTranslate(-offX,-offY);
+                path.transform(pathM);
+            }
+
         }
     }
 
     public void drawPath(Path path)
     {
+        if(offX!=0&&offY!=0)
+        {
+            pathM.reset();
+            pathM.setTranslate(offX,offY);
+            path.transform(pathM);
+        }
+
         grap.drawPath(path,paint);
+
+        if(offX!=0&&offY!=0)
+        {
+            pathM.reset();
+            pathM.setTranslate(-offX,-offY);
+            path.transform(pathM);
+        }
     }
 
     public Paint getPaint() {
@@ -456,9 +504,16 @@ public class Graphics
     private float offY;
 
     public void translate(float x, float y) {
-        offX += x;
-        offY += y;
+        offX = x;
+        offY = y;
     }
+
+    public void reset() {
+        offX = 0;
+        offY = 0;
+    }
+
+
 
     public Canvas getCanvas() {
         return grap;
