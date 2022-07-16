@@ -48,7 +48,7 @@ public class RoundHelper {
         mRadii = new float[8];
         mStrokeRadii = new float[8];
         mRectF = new RectF();
-        mStrokeColor = Color.WHITE;
+        mStrokeColor = Color.BLACK;
     }
 
     private void setData() {
@@ -58,7 +58,8 @@ public class RoundHelper {
             mPath = new Path();
             mTempPath = new Path();
 //            mXfermode = new PorterDuffXfermode(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PorterDuff.Mode.DST_OUT : PorterDuff.Mode.DST_IN);
-            mXfermode = new PorterDuffXfermode(PorterDuff.Mode.XOR);
+//            mXfermode = new PorterDuffXfermode(PorterDuff.Mode.XOR);
+            mXfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_OUT);
         }
 
 

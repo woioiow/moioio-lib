@@ -73,6 +73,5 @@ public class AppUtil
             MyLog.printStackTrace(e);
 
         }
-
     }
 }
