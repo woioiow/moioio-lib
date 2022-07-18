@@ -9,74 +9,66 @@ import android.view.WindowManager;
 
 import com.moioio.android.MyAndroidLib;
 
-public class DisplayUtil
-{
+import java.lang.reflect.Method;
+
+public class DisplayUtil {
 
     static DisplayMetrics localDisplayMetrics;
     static WindowManager windowManager;
     static Resources resources;
 
 
-    public static int topH( ){
+    public static int topH() {
         return getStateBarHeight(MyAndroidLib.context);
     }
 
-    public static int bottomH( ){
+    public static int bottomH() {
         return getNavigationBarHeight(MyAndroidLib.context);
     }
 
-    public static int dip( int num)
-    {
-        return getDip(MyAndroidLib.context,num);
+    public static int dip(int num) {
+        return getDip(MyAndroidLib.context, num);
     }
 
-    public static int screenW()
-    {
+    public static int screenW() {
         return getScreenWidth(MyAndroidLib.context);
     }
 
-    public static int screenH()
-    {
+    public static int screenH() {
         return getScreenHeight(MyAndroidLib.context);
     }
 
-    public static int screenW(float rate)
-    {
-        return (int) (getScreenWidth(MyAndroidLib.context)*rate);
+    public static int screenW(float rate) {
+        return (int) (getScreenWidth(MyAndroidLib.context) * rate);
     }
 
-    public static int screenH(float rate)
-    {
-        return (int) (getScreenHeight(MyAndroidLib.context)*rate);
+    public static int screenH(float rate) {
+        return (int) (getScreenHeight(MyAndroidLib.context) * rate);
     }
 
 
-    public static int topH(Context context){
+    public static int topH(Context context) {
         return getStateBarHeight(context);
     }
 
-    public static int bottomH(Context context){
+    public static int bottomH(Context context) {
         return getNavigationBarHeight(context);
     }
 
-    public static int dip(Context context, int num)
-    {
-        return getDip(context,num);
+    public static int dip(Context context, int num) {
+        return getDip(context, num);
     }
 
-    public static int screenW(Context context)
-    {
+    public static int screenW(Context context) {
         return getScreenWidth(context);
     }
 
-    public static int screenH(Context context)
-    {
+    public static int screenH(Context context) {
         return getScreenHeight(context);
     }
 
 
-
-    public static int getStateBarHeight(Context context){
+    public static int getStateBarHeight(Context context) {
         initDip(context);
         int result = 0;
         int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
@@ -87,9 +79,8 @@ public class DisplayUtil
     }
 
 
-
     public static int getNavigationBarHeight(Context context) {
-        return  getNavigationBarHeight(context, Configuration.ORIENTATION_PORTRAIT);
+        return getNavigationBarHeight(context, Configuration.ORIENTATION_PORTRAIT);
     }
 
 
@@ -103,63 +94,94 @@ public class DisplayUtil
     }
 
 
-
-    public static int getDip(Context context, int num)
-    {
-        float value = num * getScreenDpi(  context);
+    public static int getDip(Context context, int num) {
+        float value = num * getScreenDpi(context);
         return (int) value;
     }
 
 
-    private static void initDip(Context context)
-    {
-        if(localDisplayMetrics==null)
-        {
+    private static void initDip(Context context) {
+        if (localDisplayMetrics == null) {
             localDisplayMetrics = new DisplayMetrics();
-            windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+            windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
             windowManager.getDefaultDisplay().getMetrics(localDisplayMetrics);
             resources = context.getResources();
         }
     }
 
 
-    public static void reset()
-    {
+    public static void reset() {
         localDisplayMetrics = null;
         windowManager = null;
         resources = null;
     }
 
-    public static float getScreenDpi(Context context)
-    {
+    public static float getScreenDpi(Context context) {
         initDip(context);
         return localDisplayMetrics.density;
     }
 
 
-    public static int getScreenHeight(Context context)
-    {
+    public static int getScreenHeight(Context context) {
         initDip(context);
         return localDisplayMetrics.heightPixels;
     }
 
-    public static int getScreenWidth(Context context)
-    {
+    public static int getScreenWidth(Context context) {
         initDip(context);
         return localDisplayMetrics.widthPixels;
     }
 
 
-    public static int getRateScreenHeight(Context context,float rate)
-    {
-        int height = (int) (DisplayUtil.getScreenHeight(context)*rate);
+    public static int getRateScreenHeight(Context context, float rate) {
+        int height = (int) (DisplayUtil.getScreenHeight(context) * rate);
         return height;
     }
 
-    public static int getRateScreenWidth(Context context,float rate)
-    {
-        int width = (int) (DisplayUtil.getScreenWidth(context)*rate);
+    public static int getRateScreenWidth(Context context, float rate) {
+        int width = (int) (DisplayUtil.getScreenWidth(context) * rate);
         return width;
+    }
+
+
+    public static boolean checkNavigationBar(Context context) {
+
+        boolean hasNavigationBar = false;
+
+        Resources rs = context.getResources();
+
+        int id = rs.getIdentifier("config_showNavigationBar", "bool", "android");
+
+        if (id > 0) {
+
+            hasNavigationBar = rs.getBoolean(id);
+
+        }
+
+        try {
+
+            Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
+
+            Method m = systemPropertiesClass.getMethod("get", String.class);
+
+            String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
+
+            if ("1".equals(navBarOverride)) {
+
+                hasNavigationBar = false;
+
+            } else if ("0".equals(navBarOverride)) {
+
+                hasNavigationBar = true;
+
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        return hasNavigationBar;
+
     }
 
 
