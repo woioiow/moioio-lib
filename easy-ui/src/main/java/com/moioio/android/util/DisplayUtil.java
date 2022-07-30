@@ -13,6 +13,29 @@ import java.lang.reflect.Method;
 
 public class DisplayUtil {
 
+    public static int DIP_5;
+    public static int DIP_10;
+    public static int DIP_15;
+    public static int DIP_20;
+    public static int DIP_25;
+    public static int DIP_30;
+    public static int DIP_35;
+    public static int DIP_40;
+    public static int DIP_45;
+    public static int DIP_50;
+    public static int DIP_55;
+    public static int DIP_60;
+    public static int DIP_65;
+    public static int DIP_70;
+    public static int DIP_75;
+    public static int DIP_80;
+    public static int DIP_85;
+    public static int DIP_90;
+    public static int DIP_95;
+    public static int DIP_100;
+
+
+
     static DisplayMetrics localDisplayMetrics;
     static WindowManager windowManager;
     static Resources resources;
@@ -185,4 +208,27 @@ public class DisplayUtil {
     }
 
 
+    public static void init() {
+
+        DIP_5 = dip(5);
+        DIP_10 = dip(10);
+        DIP_15 = dip(15);
+        DIP_20 = dip(20);
+        DIP_25 = dip(25);
+        DIP_30 = dip(30);
+        DIP_35 = dip(35);
+        DIP_40 = dip(40);
+        DIP_45 = dip(45);
+        DIP_50 = dip(50);
+        DIP_55 = dip(55);
+        DIP_60 = dip(60);
+        DIP_65 = dip(65);
+        DIP_70 = dip(70);
+        DIP_75 = dip(75);
+        DIP_80 = dip(80);
+        DIP_85 = dip(85);
+        DIP_90 = dip(90);
+        DIP_95 = dip(95);
+        DIP_100 = dip(100);
+    }
 }
